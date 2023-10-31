@@ -5,7 +5,6 @@
 #include "component/window.h"
 #include "component/menubar.h"
 #include "component/menu.h"
-#include "component/canvas.h"
 
 #include "plugins/lsp.h"
 

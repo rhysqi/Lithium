@@ -23,7 +23,7 @@ int main() {
                                        border_width, border_color, background_color);
 
     // Mengatur judul window
-    XStoreName(display, window, "Window Sederhana");
+    XStoreName(display, window, "Lithium");
 
     // Menampilkan window
     XMapWindow(display, window);
