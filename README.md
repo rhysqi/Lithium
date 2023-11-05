@@ -3,6 +3,11 @@ Text editor that using native X11. Suitable in Unix/Unix-like environment. <br>
 Good for C/C++ and Assembly development.
 
 # Features
+- Syntax Highlighting
+- File format detection
+- Custom Themes
+- Snippets
+- LLVM LSP
 
 # Tested Platform
 - [x] FreeBSD 12
