@@ -6,6 +6,7 @@ Good for C/C++ and Assembly development.
 - Syntax Highlighting
 - File format detection
 - Custom Themes
+- Custom HotKeys
 - Snippets
 - LLVM LSP
 
