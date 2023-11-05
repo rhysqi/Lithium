@@ -1,6 +1,6 @@
 # Lithium
 Text editor that using native X11. Suitable in Unix/Unix-like environment. <br>
-Good for C/C++ and Assembly development.
+Good for C/C++ and Assembly language.
 
 # Features
 - Syntax Highlighting
