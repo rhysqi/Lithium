@@ -33,6 +33,11 @@
 #define LT_CORE_HH
 
 void Lt_Core();
+void Lt_Read();
+void Lt_Write();
+
+void Lt_Backups();
 void Lt_HotKeys();
+void Lt_Setting();
 
 #endif /* LT_CORE_HH */
