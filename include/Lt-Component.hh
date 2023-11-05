@@ -31,6 +31,7 @@
 
 #ifndef LT_COMPONENT_HH
 #define LT_COMPONENT_HH
+
 typedef struct{
     const char *title;
     short int id;
