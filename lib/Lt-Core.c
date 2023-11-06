@@ -29,9 +29,32 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <X11/Xlib.h>
+
 #include "../include/Lt-Core.hh"
 
 
 void Lt_Core(){
+    
+}
+
+void Lt_Read(){
 
 }
+
+void Lt_Write(){
+
+}
+
+void Lt_Backups(){
+
+}
+
+void Lt_HotKeys(){
+
+}
+
+void Lt_Setting(){
+
+}
+
