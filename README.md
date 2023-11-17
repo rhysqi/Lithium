@@ -3,10 +3,10 @@ Text editor that using native X11. Suitable in Unix/Unix-like environment. <br>
 Good for C/C++ and Assembly language.
 
 # Features
-- Syntax Highlighting
 - File format detection
-- Custom Themes
+- Syntax Highlighting
 - Custom HotKeys
+- Custom Themes
 - Snippets
 - LLVM LSP
 
@@ -16,13 +16,23 @@ Good for C/C++ and Assembly language.
 
 # Dependencies & Toolchains
 - libX11
-- LLVM v13
-- CMake v3.2
+- LLVM 15.0
+- Makefile
+- CMake 3.2x
 
 # Build
+
+Makefile
+```
+make buildware
+```
+
+CMake
 ```
 mkdir build
 cd build
 cmake ..
 make
 ```
+
+
