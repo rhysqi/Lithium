@@ -4,11 +4,6 @@
 // Window section
 void Lt_Window(Display *Dsp, D_Lt_Window _D_){
     _D_.title = "Lithium";
-    
-    if ( _D_.height && _D_.width == 0) {
-        
-    }
-
 
 }
 
