@@ -32,6 +32,7 @@
 #ifndef LT_COMPONENT_HH
 #define LT_COMPONENT_HH
 
+#include "X11/Xlib.h"
 typedef struct{
     const char *title;
     short int id;
@@ -52,8 +53,9 @@ typedef struct{
     unsigned int width;
 } D_Lt_Button;
 
-void Lt_Window();
-void Lt_WindowBG();
+void Lt_Window(Display *Dsp, D_Lt_Window _D_);
+void Lt_Window_Title(volatile char *title[]);
+void Lt_WindowBG(volatile char *BG[]);
 void Lt_WindowParent();
 
 void Lt_InputBox();

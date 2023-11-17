@@ -32,7 +32,9 @@
 #ifndef LT_CORE_HH
 #define LT_CORE_HH
 
-void Lt_Core();
+#include <X11/Xlib.h>
+
+void Lt_Core(Display *Dsp, int _CONS);
 void Lt_Read();
 void Lt_Write();
 
