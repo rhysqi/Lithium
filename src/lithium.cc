@@ -33,7 +33,8 @@
 
 int main(int argc, const char *argv[]){
 
-    
+    D_Lt_Window D_Lt_Window;
+    D_Lt_Window.title = "Lithium";
 
     return 0;
 }
