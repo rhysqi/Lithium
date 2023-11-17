@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Custom config for user experience
+    Read docs in https://github.com/rhysqi/Lithium
+-->
+<Head name="custom">
+
+    <Config></Config>
+
+    <Theme></Theme>
+
+    <Shortcuts></Shortcuts>
+
+</Head>
