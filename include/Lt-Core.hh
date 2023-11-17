@@ -37,9 +37,15 @@
 void Lt_Core(Display *Dsp, int _CONS);
 void Lt_Read();
 void Lt_Write();
+void Lt_LineCounter();
 
 void Lt_Backups();
 void Lt_HotKeys();
 void Lt_Setting();
+
+void Lt_Parser();
+void Lt_ParseSym(const char* SYM);
+void Lt_ParseArgs(const char* Args);
+void Lt_Parse_Read(const char* Read, ...);
 
 #endif /* LT_CORE_HH */
