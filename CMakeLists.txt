@@ -5,15 +5,11 @@ SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_STANDARD_REQUIRED true)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/local/include -L/usr/local/lib")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fstack-protector-strong")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lX11")
 
 set(SOURCES
     src/lithium.cc
-
-    src/temp/core.cc
-    src/temp/temp.cc
-    src/temp/handling.cc
 
     src/component/window.cc
     src/component/button.cc
@@ -23,4 +19,4 @@ set(SOURCES
     src/plugins/lsp.cc
 )
 
-add_executable(Program ${SOURCES})
+add_executable(Lithium ${SOURCES})
