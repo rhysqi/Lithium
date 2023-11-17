@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
-    Custom config for user experience
-    Read docs in https://github.com/rhysqi/Lithium
+  - Custom config for user experience
+  - Read docs in https://github.com/rhysqi/Lithium for full details configuration
 -->
+
 <Head name="custom">
 
     <Config></Config>

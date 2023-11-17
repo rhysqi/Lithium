@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
-    Default configuration setup
-    Don't change here
+  - Default configuration setup
+  - Please don't change here
+  - Read docs in https://github.com/rhysqi/Lithium
  -->
+
 <Head name="default">
 
     <Config>
