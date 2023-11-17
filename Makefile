@@ -1,12 +1,10 @@
-CC		= clang++15
-CXFLAGS	= -O2 -fno-strict-aliasing -fstack-protector-strong
-CXSTD	= -std=c++17 -stdlib=libc++
-CXARGS	= -lX11
-
+include Makefile.inc
+# Folder list
 BUILD	:= build
 LIB		:= lib
+_PKG_	:= build/package
 
-.PHONY: buildware check_dir
+.PHONY: check_dir package
 
 buildware: check_dir
 
@@ -25,4 +23,10 @@ check_dir:
 		echo "Directory $(LIB) already exists."; \
 	fi
 
-	
+package:
+	@if [ ! -d "$(_PKG_)" ]; then \
+		mkdir -p $(_PKG_); \
+		echo "Directory $(_PKG_) created..."; \
+	else \
+		echo "Directory $(_PKG_) already exists."; \
+	fi
