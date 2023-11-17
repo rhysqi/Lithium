@@ -35,8 +35,8 @@
 #include <X11/Xlib.h>
 
 void Lt_Core(Display *Dsp, int _CONS);
-void Lt_Read();
-void Lt_Write();
+void Lt_Read(const char *_FILE[]);
+void Lt_Write(const char *_FILE[]);
 void Lt_LineCounter();
 
 void Lt_Backups();
@@ -46,6 +46,6 @@ void Lt_Setting();
 void Lt_Parser();
 void Lt_ParseSym(const char* SYM);
 void Lt_ParseArgs(const char* Args);
-void Lt_Parse_Read(const char* Read, ...);
+void Lt_Parser_Read(const char* _Read, ...);
 
 #endif /* LT_CORE_HH */

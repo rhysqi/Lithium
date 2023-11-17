@@ -61,13 +61,13 @@ void Lt_WindowParent();
 void Lt_InputBox();
 void Lt_InputBox_Multiline();
 
-void Lt_Button();
+void Lt_Button(const char *text[]);
 void Lt_ButtonParent();
 void Lt_Check_Button();
 void Lt_Radio_Button();
 
-void Lt_Menu();
+void Lt_Menu(int Lt_Menu_ID, const char *text[]);
 void Lt_MenuOverlay();
-void Lt_MenuItem();
+void Lt_MenuItem(int Lt_Menu_ID, const char *text[]);
 
 #endif /* LT_COMPONENT_HH */
