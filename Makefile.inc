@@ -1,21 +1,27 @@
 # C/C++ Standard settings
 CXX			= clang++-15
 CXSTD		= -std=c++17 -stdlib=libc++
+
+CXFLAGS		= -O2 -fno-strict-aliasing -flto
+CXFLAGS		+= -fstack-protector-strong -fvectorize
+
+CXLIBS		= -I/usr/local/include -L/usr/local/lib
+CXLIBS		+= -I/usr/include -L/usr/lib
+
 CXARGS		= -lX11
-CXFLAGS		= -O2 -fno-strict-aliasing
-CXFLAGS		+= -fstack-protector-strong
+
 
 # Folder cache list
-SRCS	:= src
-LIB		:= lib
-_PKG_	:= build/package
+SRCS		:= src
+LIB			:= lib
+_PKG_		:= build/package
 
-BUILD	:= build/
+BUILD		= build
 
 # Lib options
-INDENT		= -c -fPIE
+INDENT_RUN	= -c -fPIE
+SHARED		= -shared -o
 
-OBJS		= -c
 STATIC-ARC	= llvm-ar-15 rcs
 
 .PHONY: check_dir package
