@@ -32,13 +32,14 @@
 #include "../include/lithium.hh"
 
 int main(int argc, const char *argv[]){
+    // Definition struct types
+    D_Lt_Core   _D_Core_;
     D_Lt_Window _D_Win_;
     D_Lt_Button _D_Btn_;
     D_Lt_Menu   _D_Menu_;
-
-    Display     *Dsp;
     
-    Lt_Core(Dsp, 1);
+    // Core function
+    Lt_Core( _D_Core_.Dsp, 1);
 
     return 0;
 }
