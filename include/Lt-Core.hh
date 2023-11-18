@@ -32,7 +32,17 @@
 #ifndef LT_CORE_HH
 #define LT_CORE_HH
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include <X11/Xlib.h>
+
+typedef struct{
+    Display *Dsp = XOpenDisplay(NULL);;
+    Window Win;
+    int Scr = DefaultScreen(Dsp);
+    XEvent Xe;
+} D_Lt_Core;
 
 void Lt_Core(Display *Dsp, int _CONS);
 void Lt_Read(const char *_FILE[]);
