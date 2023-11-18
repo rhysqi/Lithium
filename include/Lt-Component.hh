@@ -32,7 +32,8 @@
 #ifndef LT_COMPONENT_HH
 #define LT_COMPONENT_HH
 
-#include "X11/Xlib.h"
+#include <X11/Xlib.h>
+
 typedef struct{
     const char *title;
     short int id;
@@ -48,6 +49,7 @@ typedef struct{
 } D_Lt_Menu;
 
 typedef struct{
+    int ID;
     const char *name;
     unsigned int height;
     unsigned int width;
@@ -56,18 +58,18 @@ typedef struct{
 void Lt_Window(Display *Dsp, D_Lt_Window _D_);
 void Lt_Window_Title(volatile char *title[]);
 void Lt_WindowBG(volatile char *BG[]);
-void Lt_WindowParent();
+void Lt_WindowParent(int Lt_Win_ID);
 
-void Lt_InputBox();
-void Lt_InputBox_Multiline();
+void Lt_InputBox(int Lt_Input_ID, const char *text[]);
+void Lt_InputBox_Multiline(int Lt_Input_ID, const char *text[]);
 
-void Lt_Button(const char *text[]);
-void Lt_ButtonParent();
-void Lt_Check_Button();
-void Lt_Radio_Button();
+void Lt_Button(int Lt_Btn_ID, const char *text[]);
+void Lt_ButtonParent(int Lt_Btn_ID);
+void Lt_Check_Button(int Lt_Btn_ID);
+void Lt_Radio_Button(int Lt_Btn_ID);
 
 void Lt_Menu(int Lt_Menu_ID, const char *text[]);
-void Lt_MenuOverlay();
+void Lt_MenuOverlay(int Lt_Menu_ID, const char *text[]);
 void Lt_MenuItem(int Lt_Menu_ID, const char *text[]);
 
 #endif /* LT_COMPONENT_HH */

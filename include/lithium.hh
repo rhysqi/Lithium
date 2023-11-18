@@ -33,6 +33,7 @@
 #define LITHIUM_HH
 
 #include "Lt-Core.hh"
+#include "Lt-Parser.hh"
 #include "Lt-Component.hh"
 
-#endif
+#endif /* LITHIUM_HH */
