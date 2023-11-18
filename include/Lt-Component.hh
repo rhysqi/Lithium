@@ -32,6 +32,9 @@
 #ifndef LT_COMPONENT_HH
 #define LT_COMPONENT_HH
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include <X11/Xlib.h>
 
 typedef struct{
