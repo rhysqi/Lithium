@@ -10,7 +10,6 @@ CXLIBS		+= -I/usr/include -L/usr/lib
 
 CXARGS		= -lX11
 
-
 # Folder cache list
 LIB			:= lib
 _PKG_		:= build/package
@@ -24,7 +23,8 @@ SHARED		= -shared -o
 
 STATIC-ARC	= llvm-ar-15 rcs
 
-.PHONY: check_dir package
+.PHONY: check_dir  package
+
 package:
 	@if [ ! -d "$(_PKG_)" ]; then \
 		mkdir -p $(_PKG_); \

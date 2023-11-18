@@ -11,7 +11,7 @@ buildware: check_dir shared static
 	$(LIB)/libLithium.so \
 	$(CXSTD) $(CXLIBS) $(CXFLAGS) $(CXARGS)
 
-.PHONY: shared static
+.PHONY: shared static check_lib
 static: check_dir
 	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Core.cc -o $(BUILD)/Lt-Core.o
 	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Component.cc -o $(BUILD)/Lt-Comp.o
