@@ -32,7 +32,13 @@
 #include "../include/lithium.hh"
 
 int main(int argc, const char *argv[]){
+    D_Lt_Window _D_Win_;
+    D_Lt_Button _D_Btn_;
+    D_Lt_Menu   _D_Menu_;
 
+    Display     *Dsp;
     
+    Lt_Core(Dsp, 1);
+
     return 0;
 }

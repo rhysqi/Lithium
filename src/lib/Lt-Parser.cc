@@ -29,7 +29,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../include/Lt-Core.hh"
+#include "../../include/Lt-Parser.hh"
 
 #include <stdarg.h>
 
@@ -48,6 +48,5 @@ void Lt_ParseArgs(const char* Args){
 void Lt_Parser_Read(const char* _Read, ...){
 
     va_list args;
-    va_start(args, _Read);
 }
 
