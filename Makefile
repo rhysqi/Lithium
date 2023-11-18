@@ -1,32 +1,19 @@
 include Makefile.inc
-# Folder list
-BUILD	:= build
-LIB		:= lib
-_PKG_	:= build/package
 
-.PHONY: check_dir package
+# File and header list
+SRCS	= lithium.cc
+
+LIBS	= src/lib/
+OBJ		= ${patsubst  $(LIBS)/%.cc, $(BUILD)/%.o, }
+
 
 buildware: check_dir
+	# $(CXX) $(OBJS) -o $(LIBS) $(CXSTD) $(CXFLAGS)
+	
 
-check_dir:
-	@if [ ! -d "$(BUILD)" ]; then \
-		mkdir -p $(BUILD); \
-		echo "Directory $(BUILD) created..."; \
-	else \
-		echo "Directory $(BUILD) already exists."; \
-	fi
+.PHONY: shared static
+static:
+	$(CXX) $(OBJS) $(LIBS) $(CXSTD) $(CXFLAGS)
 
-	@if [ ! -d "$(LIB)" ]; then \
-		mkdir -p $(LIB); \
-		echo "Directory $(LIB) created..."; \
-	else \
-		echo "Directory $(LIB) already exists."; \
-	fi
-
-package:
-	@if [ ! -d "$(_PKG_)" ]; then \
-		mkdir -p $(_PKG_); \
-		echo "Directory $(_PKG_) created..."; \
-	else \
-		echo "Directory $(_PKG_) already exists."; \
-	fi
+shared:
+	$(CXX) $(OBJS) $(LIBS) $(CXSTD) $(CXFLAGS)
