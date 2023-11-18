@@ -12,11 +12,11 @@ CXARGS		= -lX11
 
 
 # Folder cache list
-SRCS		:= src
 LIB			:= lib
 _PKG_		:= build/package
 
 BUILD		= build
+BIN			= bin
 
 # Lib options
 INDENT_RUN	= -c -fPIE
@@ -39,6 +39,13 @@ check_dir:
 		echo "Directory $(BUILD) created..."; \
 	else \
 		echo "Directory $(BUILD) already exists."; \
+	fi
+
+	@if [ ! -d "$(BIN)" ]; then \
+		mkdir -p $(BIN); \
+		echo "Directory $(BIN) created..."; \
+	else \
+		echo "Directory $(BIN) already exists."; \
 	fi
 
 	@if [ ! -d "$(LIB)" ]; then \
