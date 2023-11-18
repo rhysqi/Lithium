@@ -33,30 +33,30 @@
 
 void Lt_Core(Display *Dsp, int _CONS){
     // Software service core function
-    XEvent Xe;
+    D_Lt_Core _D_Core_;
+
+    if (Dsp == NULL) {
+      fprintf(stderr, "Cannot open display\n");
+      exit(1);
+   }
+
     while (_CONS) {
-        XNextEvent(Dsp, &Xe);
+        XNextEvent(Dsp, &_D_Core_.Xe);
         
     }
-}
 
-void Lt_Read(){
+    _D_Core_.Scr = DefaultScreen(Dsp);
 
-}
-
-void Lt_Write(){
+    XCloseDisplay(Dsp);
 
 }
 
-
-void Lt_Backups(){
-
-}
-
-void Lt_HotKeys(){
+void Lt_Read(const char *_FILE[]){
 
 }
 
-void Lt_Setting(){
+void Lt_Write(const char *_FILE[]){
 
 }
+
+
