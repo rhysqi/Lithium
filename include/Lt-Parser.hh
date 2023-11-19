@@ -32,6 +32,8 @@
 #ifndef LT_PARSER_HH
 #define LT_PARSER_HH
 
+#include <stdarg.h>
+
 void Lt_Parser();
 void Lt_ParseSym(const char* SYM);
 void Lt_ParseArgs(const char* Args);

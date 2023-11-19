@@ -32,6 +32,7 @@
 #ifndef LT_CORE_HH
 #define LT_CORE_HH
 
+#include "X11/X.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -39,9 +40,9 @@
 
 typedef struct Lt_Core{
     Display *Dsp = XOpenDisplay(NULL);
-    Window Win;
     int Scr = DefaultScreen(Dsp);
     XEvent Xe;
+    
 } D_Lt_Core;
 
 void Lt_Core(Display *Dsp, int _CONS);
