@@ -37,7 +37,7 @@
 
 #include <X11/Xlib.h>
 
-typedef struct D_Lt_Window{
+typedef struct Lt_Window{
     const char *title;
     short int id;
     unsigned int POSX;
@@ -46,12 +46,12 @@ typedef struct D_Lt_Window{
     unsigned int width;
 } D_Lt_Window;
 
-typedef struct D_Lt_Menu{
+typedef struct Lt_Menu{
     const char *text;
     int id;
 } D_Lt_Menu;
 
-typedef struct D_Lt_Button{
+typedef struct Lt_Button{
     int ID;
     const char *name;
     unsigned int height;
