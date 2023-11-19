@@ -36,17 +36,37 @@ void Lt_Core(Display *Dsp, int _CONS){
     // Software service core function
     D_Lt_Core _D_Core_;
 
+    Window Win;
+    int Root = RootWindow(Dsp, _D_Core_.Scr);
+    unsigned long valuemask = 0;
+    XSetWindowAttributes Attr;
+
     if (Dsp == NULL) {
       fprintf(stderr, "Cannot open display\n");
       exit(1);
    }
 
+    Attr.background_pixel = XBlackPixel(Dsp, 0);
+    Attr.border_pixel = XBlackPixel(Dsp, 0);
+    Attr.event_mask = ExposureMask | KeyPressMask;
+    valuemask = CWBackPixel | CWBorderPixel | CWEventMask;
+
+    int Scr_Width = DisplayWidth(Dsp, _D_Core_.Scr);
+    int Scr_Height = DisplayHeight(Dsp, _D_Core_.Scr);
+
+    Win = XCreateWindow(
+        Dsp, Root,
+        0, 0, Scr_Width, Scr_Height,
+        0, CopyFromParent, InputOutput,
+        CopyFromParent, valuemask,
+        &Attr
+    );
+
+    XMapWindow(Dsp, Win);
     while (_CONS) {
         XNextEvent(Dsp, &_D_Core_.Xe);
-        
-    }
 
-    _D_Core_.Scr = DefaultScreen(Dsp);
+    }
 
     XCloseDisplay(Dsp);
 

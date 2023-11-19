@@ -31,8 +31,6 @@
 
 #include "../../include/Lt-Parser.hh"
 
-#include <stdarg.h>
-
 void Lt_Parser(){
 
 }
@@ -47,6 +45,5 @@ void Lt_ParseArgs(const char* Args){
 
 void Lt_Parser_Read(const char* _Read, ...){
 
-    va_list args;
 }
 
