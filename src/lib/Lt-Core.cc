@@ -30,6 +30,7 @@
  */
 
 #include "../../include/Lt-Core.hh"
+#include "X11/X.h"
 #include "X11/Xlib.h"
 
 void Lt_Core(Display *Dsp, int _CONS){
@@ -40,13 +41,18 @@ void Lt_Core(Display *Dsp, int _CONS){
     int Root = RootWindow(Dsp, _D_Core_.Scr);
     unsigned long valuemask = 0;
     XSetWindowAttributes Attr;
+    const char *Color = "#343541";
 
     if (Dsp == NULL) {
       fprintf(stderr, "Cannot open display\n");
       exit(1);
-   }
+    }
 
-    Attr.background_pixel = XBlackPixel(Dsp, 0);
+    Colormap Cols = DefaultColormap(Dsp, _D_Core_.Scr);
+    XColor WColor, exact_color;
+    XAllocNamedColor(Dsp, Cols, Color, &WColor, &exact_color);
+
+    Attr.background_pixel = WColor.pixel;
     Attr.border_pixel = XBlackPixel(Dsp, 0);
     Attr.event_mask = ExposureMask | KeyPressMask;
     valuemask = CWBackPixel | CWBorderPixel | CWEventMask;
