@@ -17,14 +17,14 @@ Good for C/C++ and Assembly language.
 # Dependencies & Toolchains
 - libX11
 - LLVM 15.0
-- gmake
+- bmake
 - CMake 3.2x
 
 # Build
 
 Makefile
 ```
-make buildware
+bmake buildware
 ```
 
 CMake
