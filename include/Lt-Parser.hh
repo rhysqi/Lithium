@@ -32,11 +32,21 @@
 #ifndef LT_PARSER_HH
 #define LT_PARSER_HH
 
+#include <stdio.h>
+#include <memory.h>
+#include <stdlib.h>
 #include <stdarg.h>
 
+// Parsing data types
+typedef struct Lt_Parse{
+    const char* Args;
+    const char* SYM;
+} D_Lt_Parse;
+
+// Function parser declaration
 void Lt_Parser();
-void Lt_ParseSym(const char* SYM);
-void Lt_ParseArgs(const char* Args);
-void Lt_Parser_Read(const char* _Read, ...);
+void Lt_ParseSym();
+void Lt_ParseArgs();
+void Lt_Parser_Read();
 
 #endif /* LT_PARSER_HH */

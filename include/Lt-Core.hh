@@ -32,12 +32,12 @@
 #ifndef LT_CORE_HH
 #define LT_CORE_HH
 
-#include "X11/X.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 #include <X11/Xlib.h>
 
+// Core data types
 typedef struct Lt_Core{
     Display *Dsp = XOpenDisplay(NULL);
     int Scr = DefaultScreen(Dsp);
@@ -45,6 +45,7 @@ typedef struct Lt_Core{
     
 } D_Lt_Core;
 
+// Function core declarations
 void Lt_Core(Display *Dsp, int _CONS);
 void Lt_Read(const char *_FILE[]);
 void Lt_Write(const char *_FILE[]);
