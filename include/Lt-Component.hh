@@ -36,6 +36,7 @@
 #include <stdlib.h>
 
 #include <X11/Xlib.h>
+#include <X11/Xatom.h>
 
 // Window data types
 typedef struct Lt_Window{
@@ -63,7 +64,7 @@ typedef struct Lt_Button{
 
 // Function component declarations
 void Lt_Window(Display *Dsp, D_Lt_Window _D_);
-void Lt_Window_Title(volatile char *title[]);
+void Lt_Window_Title(Display *Dsp,Window Win, const char *title);
 void Lt_WindowBG(volatile char *BG[]);
 void Lt_WindowParent(int Lt_Win_ID);
 
