@@ -31,7 +31,9 @@ CMake
 ```
 mkdir build
 cd build
-cmake ..
+cmake -DCMAKE_C_COMPILER=/path/to/clang \
+      -DCMAKE_CXX_COMPILER=/path/to/clang++ \
+      ..
 make
 ```
 
