@@ -37,7 +37,7 @@
 
 #include <X11/Xlib.h>
 
-typedef struct D_Lt_Core{
+typedef struct Lt_Core{
     Display *Dsp = XOpenDisplay(NULL);
     Window Win;
     int Scr = DefaultScreen(Dsp);
