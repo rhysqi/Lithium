@@ -30,8 +30,9 @@
  */
 
 #include "../../include/Lt-Core.hh"
+#include "X11/Xlib.h"
 
-void Lt_Core(Display *Dsp, short int _CONS){
+void Lt_Core(Display *Dsp, int _CONS){
     // Software service core function
     D_Lt_Core _D_Core_;
 

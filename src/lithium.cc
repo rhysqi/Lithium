@@ -35,9 +35,8 @@ int main(int argc, const char *argv[]){
     // Definition struct types
     D_Lt_Core   _D_Core_;
     D_Lt_Window _D_Win_;
-    D_Lt_Button _D_Btn_;
-    D_Lt_Menu   _D_Menu_;
     
+    _D_Core_.Dsp = XOpenDisplay(NULL);
     // Core function
     Lt_Core( _D_Core_.Dsp, 1);
 
