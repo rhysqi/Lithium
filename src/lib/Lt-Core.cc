@@ -30,12 +30,15 @@
  */
 
 #include "../../include/Lt-Core.hh"
+#include "../../include/Lt-Component.hh"
 
 void Lt_Core(Display *Dsp, int _CONS){
     // Software service core function
     D_Lt_Core _D_Core_;
 
+    // Data declare
     Window Win;
+    const char *title= "Lithium";
     int Root = RootWindow(Dsp, _D_Core_.Scr);
     unsigned long valuemask = 0;
     XSetWindowAttributes Attr;
@@ -46,6 +49,7 @@ void Lt_Core(Display *Dsp, int _CONS){
       exit(1);
     }
 
+    // Color background
     Colormap Cols = DefaultColormap(Dsp, _D_Core_.Scr);
     XColor WColor, exact_color;
     XAllocNamedColor(Dsp, Cols, Color, &WColor, &exact_color);
@@ -65,6 +69,8 @@ void Lt_Core(Display *Dsp, int _CONS){
         CopyFromParent, valuemask,
         &Attr
     );
+
+    Lt_Window_Title(Dsp, Win, title);
 
     XMapWindow(Dsp, Win);
     while (_CONS) {

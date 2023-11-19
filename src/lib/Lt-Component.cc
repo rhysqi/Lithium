@@ -30,6 +30,7 @@
  */
 
 #include "../../include/Lt-Component.hh"
+#include "X11/Xlib.h"
 
 // Window section
 void Lt_Window(Display *Dsp, D_Lt_Window _D_){
@@ -37,8 +38,8 @@ void Lt_Window(Display *Dsp, D_Lt_Window _D_){
 
 }
 
-void Lt_Window_Title(volatile char *title[]){
-
+void Lt_Window_Title(Display *Dsp, Window Win, const char *title){
+    XStoreName(Dsp, Win, title);
 }
 
 void Lt_WindowBG(volatile char *BG[]){
