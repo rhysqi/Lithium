@@ -37,14 +37,14 @@
 
 #include <X11/Xlib.h>
 
-typedef struct{
-    Display *Dsp = XOpenDisplay(NULL);;
+typedef struct D_Lt_Core{
+    Display *Dsp = XOpenDisplay(NULL);
     Window Win;
     int Scr = DefaultScreen(Dsp);
     XEvent Xe;
 } D_Lt_Core;
 
-void Lt_Core(Display *Dsp, short int _CONS);
+void Lt_Core(Display *Dsp, int _CONS);
 void Lt_Read(const char *_FILE[]);
 void Lt_Write(const char *_FILE[]);
 void Lt_LineCounter();
