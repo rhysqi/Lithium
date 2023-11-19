@@ -1,4 +1,4 @@
-include Makefile.inc
+include config.mk
 
 # Files, program and header list
 SRCS	= src/*.cc

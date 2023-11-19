@@ -4,7 +4,8 @@ CXSTD		= -std=c++17 -stdlib=libc++
 
 CXFLAGS		= -O2 -fno-strict-aliasing -flto
 CXFLAGS		+= -fstack-protector-strong -fvectorize
-CXFLAGS		+= -H -v
+CXFLAGS		+= -Wnon-c-typedef-for-linkage -Wall -Wunused-variable
+CXFLAGS		+= -v
 
 CXLIBS		= -I/usr/local/include -L/usr/local/lib
 CXLIBS		+= -I/usr/include -L/usr/lib
@@ -22,7 +23,7 @@ BIN			= bin
 INDENT_RUN	= -c -fPIE
 SHARED		= -shared -o
 
-STATIC-ARC	= llvm-ar15 rcs
+STATIC-ARC	= llvm-ar15 rcsU
 
 .PHONY: check_dir  package
 
