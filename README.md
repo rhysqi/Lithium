@@ -17,7 +17,7 @@ Good for C/C++ and Assembly language.
 # Dependencies & Toolchains
 - libX11
 - LLVM 15.0
-- Bmake
+- gmake
 - CMake 3.2x
 
 # Build
