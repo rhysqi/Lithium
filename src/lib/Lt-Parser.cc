@@ -35,15 +35,15 @@ void Lt_Parser(){
 
 }
 
-void Lt_ParseSym(const char* SYM){
+void Lt_ParseSym(){
 
 }
 
-void Lt_ParseArgs(const char* Args){
+void Lt_ParseArgs(){
 
 }
 
-void Lt_Parser_Read(const char* _Read, ...){
+void Lt_Parser_Read(){
 
 }
 
