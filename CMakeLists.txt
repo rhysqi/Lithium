@@ -6,7 +6,8 @@ SET(CMAKE_CXX_STANDARD_REQUIRED true)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/local/include -L/usr/local/lib")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fstack-protector-strong")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -flto")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-c-typedef-for-linkage -Wall -Wunused-variable")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -flto") 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lX11")
 
 set(SOURCES
