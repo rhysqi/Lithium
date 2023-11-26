@@ -32,62 +32,6 @@
 #include "../../include/Lt-Core.hh"
 #include "../../include/Lt-Component.hh"
 
-void Lt_Core(Display *Dsp, int _CONS){
-    // Software service core function
-    D_Lt_Core _D_Core_;
-
-    // Data declare
-    Window Win;
-    const char *title= "Lithium";
-    int Root = RootWindow(Dsp, _D_Core_.Scr);
-    unsigned long valuemask = 0;
-    XSetWindowAttributes Attr;
-    const char *Color = "#343541";
-
-    if (Dsp == NULL) {
-      fprintf(stderr, "Cannot open display\n");
-      exit(1);
-    }
-
-    // Color background
-    Colormap Cols = DefaultColormap(Dsp, _D_Core_.Scr);
-    XColor WColor, exact_color;
-    XAllocNamedColor(Dsp, Cols, Color, &WColor, &exact_color);
-
-    Attr.background_pixel = WColor.pixel;
-    Attr.border_pixel = XBlackPixel(Dsp, 0);
-    Attr.event_mask = ExposureMask | KeyPressMask;
-    valuemask = CWBackPixel | CWBorderPixel | CWEventMask;
-
-    int Scr_Width = DisplayWidth(Dsp, _D_Core_.Scr);
-    int Scr_Height = DisplayHeight(Dsp, _D_Core_.Scr);
-
-    Win = XCreateWindow(
-        Dsp, Root,
-        0, 0, Scr_Width, Scr_Height,
-        0, CopyFromParent, InputOutput,
-        CopyFromParent, valuemask,
-        &Attr
-    );
-
-    Lt_Window_Title(Dsp, Win, title);
-
-    XMapWindow(Dsp, Win);
-    while (_CONS) {
-        XNextEvent(Dsp, &_D_Core_.Xe);
-
-    }
-
-    XCloseDisplay(Dsp);
-
+void Lt_Core(){
+    
 }
-
-void Lt_Read(const char *_FILE[]){
-
-}
-
-void Lt_Write(const char *_FILE[]){
-
-}
-
-

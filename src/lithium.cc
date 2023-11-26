@@ -32,11 +32,6 @@
 #include "../include/lithium.hh"
 
 int main(int argc, const char *argv[]){
-    // Definition struct types
-    D_Lt_Core   _D_Core_;
     
-    // Core function
-    Lt_Core( _D_Core_.Dsp, 1);
-
     return 0;
 }
