@@ -38,46 +38,23 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
-// Window data types
-typedef struct Lt_Window{
-    const char *title;
-    short int id;
-    unsigned int POSX;
-    unsigned int POSY;
-    unsigned int height;
-    unsigned int width;
-} D_Lt_Window;
-
-// Menu data types
-typedef struct Lt_Menu{
-    const char *text;
-    int id;
-} D_Lt_Menu;
-
-// Button data types
-typedef struct Lt_Button{
-    int ID;
-    const char *name;
-    unsigned int height;
-    unsigned int width;
-} D_Lt_Button;
 
 // Function component declarations
-void Lt_Window(Display *Dsp, D_Lt_Window _D_);
-void Lt_Window_Title(Display *Dsp,Window Win, const char *title);
-void Lt_WindowBG(volatile char *BG[]);
-void Lt_WindowParent(int Lt_Win_ID);
+void Lt_Window();
+void Lt_Window_Title();
+void Lt_WindowBG();
+void Lt_WindowParent();
 
-void Lt_InputBox(int Lt_Input_ID, const char *text[]);
-void Lt_InputBox_Multiline(int Lt_Input_ID, const char *text[]);
+void Lt_InputBox();
+void Lt_InputBox_Multiline();
 
-void Lt_Button(int Lt_Btn_ID, const char *text[]);
-void Lt_ButtonParent(int Lt_Btn_ID);
-void Lt_Check_Button(int Lt_Btn_ID);
-void Lt_Radio_Button(int Lt_Btn_ID);
+void Lt_Button();
+void Lt_ButtonParent();
+void Lt_Check_Button();
+void Lt_Radio_Button();
 
-void Lt_Menu(int Lt_Menu_ID, const char *text[]);
-void Lt_MenuOverlay(int Lt_Menu_ID, const char *text[]);
-void Lt_MenuItem(int Lt_Menu_ID, const char *text[]);
+void Lt_Menu();
+void Lt_MenuOverlay();
+void Lt_MenuItem();
 
 #endif /* LT_COMPONENT_HH */

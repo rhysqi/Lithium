@@ -37,18 +37,10 @@
 
 #include <X11/Xlib.h>
 
-// Core data types
-typedef struct Lt_Core{
-    Display *Dsp = XOpenDisplay(NULL);
-    int Scr = DefaultScreen(Dsp);
-    XEvent Xe;
-    
-} D_Lt_Core;
-
 // Function core declarations
-void Lt_Core(Display *Dsp, int _CONS);
-void Lt_Read(const char *_FILE[]);
-void Lt_Write(const char *_FILE[]);
+void Lt_Core();
+void Lt_Read();
+void Lt_Write();
 void Lt_LineCounter();
 
 void Lt_Backups();
