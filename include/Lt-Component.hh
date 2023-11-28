@@ -35,8 +35,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef _X11_
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#endif /* _X11_ */
 
 
 // Function component declarations
