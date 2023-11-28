@@ -40,6 +40,10 @@
 #include <X11/Xatom.h>
 #endif /* _X11_ */
 
+#ifdef _WIN32_
+#include <Windows.h>
+#endif /* _WIN32_ */
+
 
 // Function component declarations
 void Lt_Window();
