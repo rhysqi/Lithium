@@ -3,12 +3,12 @@ Text editor that using native X11 and Win32. Suitable in Unix/Unix-like environm
 Good for C/C++ and Assembly language.
 
 # Features
-- File format detection
-- Syntax Highlighting
-- Custom HotKeys
-- Custom Themes
-- Snippets
-- LLVM LSP
+- File format detection (Upcoming)
+- Syntax Highlighting (Upcoming)
+- Custom HotKeys (Upcoming)
+- Custom Themes (Upcoming)
+- Custom Snippets (Upcoming)
+- LLVM LSP (Upcoming)
 
 # Tested Platform
 - [x] FreeBSD 12
