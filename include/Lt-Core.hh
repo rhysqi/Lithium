@@ -39,6 +39,10 @@
 #include <X11/Xlib.h>
 #endif /* _X11_ */
 
+#ifdef _WIN32_
+#include <Windows.h>
+#endif /* _WIN32_ */
+
 // Function core declarations
 void Lt_Core();
 void Lt_Read();
