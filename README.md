@@ -45,13 +45,3 @@ Makefile
 ```
 gmake buildware-win32
 ```
-
-CMake
-```
-mkdir build
-cd build
-cmake -DCMAKE_C_COMPILER=/path/to/clang \
-      -DCMAKE_CXX_COMPILER=/path/to/clang++ \
-      ..
-make
-```
