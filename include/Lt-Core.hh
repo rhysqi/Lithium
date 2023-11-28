@@ -35,7 +35,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef _X11_
 #include <X11/Xlib.h>
+#endif /* _X11_ */
 
 // Function core declarations
 void Lt_Core();
