@@ -32,13 +32,37 @@
 // #include "../include/lithium.hh"
 
 #ifdef _X11_
+#include <stdio.h>
 int main(int argc, const char *argv[]){
-    
+
+    // int STATE = 3;
+
+    // Lt_Core_X11(STATE,"Lithium");
+
+    FILE *file;
+    char data[] = "Contoh tulisan ke dalam file.";
+
+    // Membuka file untuk ditulis dalam mode teks ("w")
+    file = fopen("example.txt", "w");
+
+    if (file == NULL) {
+        perror("Gagal membuka file");
+        return 1;
+    }
+
+    // Menulis data ke dalam file dalam format teks
+    fprintf(file, "%s", data);
+
+    // Menutup file
+    fclose(file);
+
+    printf("Data berhasil ditulis ke dalam file.\n");
+
     return 0;
 }
 #endif /* _X11_ */
 
-#ifndef _WIN32_
+#ifdef _WIN32_
 
 #ifndef UNICODE
 #define UNICODE
