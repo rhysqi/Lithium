@@ -32,6 +32,10 @@
 #include "../../include/Lt-Core.hh"
 #include "../../include/Lt-Component.hh"
 
-void Lt_Core(){
+void Lt_Core_X11(){
     
+}
+
+void Lt_Core_Win32(){
+
 }
