@@ -1,16 +1,15 @@
 # C/C++ Standard settings
-CXX			= clang++
+CXX			= clang++15
 CXSTD		= -std=c++17 -stdlib=libc++
 
-CXFLAGS		= -O2 -fno-strict-aliasing -flto
-CXFLAGS		+= -fstack-protector-strong -fvectorize
-CXFLAGS		+= -Wnon-c-typedef-for-linkage -Wall -Wunused-variable
-CXFLAGS		+=
+CXFLAGS		= -fno-strict-aliasing -O3 -flto
+CXFLAGS		+= -fstack-protector-strong -fvectorize -fslp-vectorize
+CXFLAGS		+= -v
 
 CXLIBS		= -I/usr/local/include -L/usr/local/lib
 CXLIBS		+= -I/usr/include -L/usr/lib
 
-CXARGS		= 
+CXARGS		= -lX11
 
 # Folder cache list
 LIB			:= lib
