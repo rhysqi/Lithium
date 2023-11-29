@@ -33,9 +33,9 @@
 #define LT_PARSER_HH
 
 #include <stdio.h>
-#include <memory.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <memory.h>
 
 // Parsing data types
 typedef struct Lt_Parse{

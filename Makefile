@@ -3,10 +3,14 @@ include config.mk
 # Files, program and header list
 SRCS	= src/lithium.cc
 LIBS	= src/lib
+LIBS_T	= src/lib/Lt-Core.cc
+LIBS_T	+= src/lib/Lt-Parser.cc
+LIBS_T	+= src/lib/Lt-Component.cc
+
 PROGRAM	= Lithium
 
 .PHONY: buildware buildware-win32 test-build
-buildware: check_dir shared static
+buildware-X11: check_dir shared static
 	$(CXX) $(SRCS) -o $(BIN)/$(PROGRAM) \
 	$(LIB)/libLithium.a \
 	$(LIB)/libLithium.so \
@@ -42,7 +46,12 @@ shared-win32: check_dir
 	$(CXX) $(SHARED) $(LIB)/libLithium.dll $(wildcard $(BUILD)/*.o) \
 	$(CXSTD) $(CXLIBS) $(CXFLAGS) $(CXARGS)
 
-test-build:
+test-build-win32:
 	$(CXX) $(SRCS) -o $(BIN)/$(PROGRAM) \
 	$(CXSTD) -mwindows -luser32 -D_WIN32_
 
+test-build-X11:
+	$(CXX) $(SRCS) $(LIBS_T) \
+	-o $(BIN)/$(PROGRAM) \
+	$(CXSTD) $(CXLIBS) $(CXFLAGS) $(CXARGS) \
+	-D_X11_
