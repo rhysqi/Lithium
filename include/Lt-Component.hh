@@ -39,8 +39,21 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
+// Declare component variable
+typedef struct Lt_X11{
+    Display *Dsp;
+    Window Win;
+    XEvent Xe;
+} Lt_X11;
+
+typedef struct Lt_Win{
+    Lt_X11 Lt_D;
+    int Scr = DefaultScreen(Lt_D.Dsp);
+    int Root = RootWindow(Lt_D.Dsp, Scr);
+} Lt_Win;
+
 // Function component declarations
-void Lt_Window_X11();
+void Lt_Window_X11(Lt_X11, Lt_Win, const char *Lt_TitleX, const char *Lt_Cols);
 void Lt_Window_Title_X11();
 void Lt_WindowBG_X11();
 void Lt_WindowParent_X11();

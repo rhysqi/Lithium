@@ -39,10 +39,10 @@
 #ifdef _X11_
 #include <X11/Xlib.h>
 
-// Function core declarations
-void Lt_Core_X11();
-void Lt_Read_X11();
-void Lt_Write_X11();
+// Function core X11 declarations
+void Lt_Core_X11(volatile int STATE, const char *Lt_N);
+void Lt_Read_X11(const char *FILE, const char *F_RD);
+void Lt_Write_X11(const char *FILE, const char *F_WR);
 void Lt_LineCounter_X11();
 
 void Lt_Backups_X11();
@@ -53,10 +53,10 @@ void Lt_Setting_X11();
 
 
 // Win32 section
-#ifndef _WIN32_
+#ifdef _WIN32_
 #include <Windows.h>
 
-// Function core declarations
+// Function core win32 declarations
 void Lt_Core_Win32();
 void Lt_Read_Win32();
 void Lt_Write_Win32();
