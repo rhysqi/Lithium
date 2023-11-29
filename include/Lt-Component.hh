@@ -38,29 +38,49 @@
 #ifdef _X11_
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
-#endif /* _X11_ */
-
-#ifdef _WIN32_
-#include <Windows.h>
-#endif /* _WIN32_ */
-
 
 // Function component declarations
-void Lt_Window();
-void Lt_Window_Title();
-void Lt_WindowBG();
-void Lt_WindowParent();
+void Lt_Window_X11();
+void Lt_Window_Title_X11();
+void Lt_WindowBG_X11();
+void Lt_WindowParent_X11();
 
-void Lt_InputBox();
-void Lt_InputBox_Multiline();
+void Lt_InputBox_X11();
+void Lt_InputBox_Multiline_X11();
 
-void Lt_Button();
-void Lt_ButtonParent();
-void Lt_Check_Button();
-void Lt_Radio_Button();
+void Lt_Button_X11();
+void Lt_ButtonParent_X11();
+void Lt_Check_Button_X11();
+void Lt_Radio_Button_X11();
 
-void Lt_Menu();
-void Lt_MenuOverlay();
-void Lt_MenuItem();
+void Lt_Menu_X11();
+void Lt_MenuOverlay_X11();
+void Lt_MenuItem_X11();
+#endif /* _X11_ */
+
+
+// Win32 section
+#ifdef _WIN32_
+#include <Windows.h>
+
+// Function component declarations
+void Lt_Window_Win32();
+void Lt_Window_Title_Win32();
+void Lt_WindowBG_Win32();
+void Lt_WindowParent_Win32();
+
+void Lt_InputBox_Win32();
+void Lt_InputBox_Multiline_Win32();
+
+void Lt_Button_Win32();
+void Lt_ButtonParent_Win32();
+void Lt_Check_Button_Win32();
+void Lt_Radio_Button_Win32();
+
+void Lt_Menu_Win32();
+void Lt_MenuOverlay_Win32();
+void Lt_MenuItem_Win32();
+
+#endif /* _WIN32_ */
 
 #endif /* LT_COMPONENT_HH */
