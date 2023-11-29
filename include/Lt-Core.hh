@@ -35,22 +35,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// X11 section
 #ifdef _X11_
 #include <X11/Xlib.h>
-#endif /* _X11_ */
-
-#ifdef _WIN32_
-#include <Windows.h>
-#endif /* _WIN32_ */
 
 // Function core declarations
-void Lt_Core();
-void Lt_Read();
-void Lt_Write();
-void Lt_LineCounter();
+void Lt_Core_X11();
+void Lt_Read_X11();
+void Lt_Write_X11();
+void Lt_LineCounter_X11();
 
-void Lt_Backups();
-void Lt_HotKeys();
-void Lt_Setting();
+void Lt_Backups_X11();
+void Lt_HotKeys_X11();
+void Lt_Setting_X11();
+
+#endif /* _X11_ */
+
+
+// Win32 section
+#ifndef _WIN32_
+#include <Windows.h>
+
+// Function core declarations
+void Lt_Core_Win32();
+void Lt_Read_Win32();
+void Lt_Write_Win32();
+void Lt_LineCounter_Win32();
+
+void Lt_Backups_Win32();
+void Lt_HotKeys_Win32();
+void Lt_Setting_Win32();
+
+#endif /* _WIN32_ */
 
 #endif /* LT_CORE_HH */
