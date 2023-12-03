@@ -10,10 +10,16 @@ Good for C/C++ and Assembly language.
 - Custom Snippets (Upcoming)
 - LLVM LSP (Upcoming)
 
-# Tested Platform
-- [x] FreeBSD 12
-- [x] LinuxMint 21
-- [x] Windows 11
+# Supported Platform
+| Platform | Version | Tier |
+|  :---:  | :---: | :---: |
+| FreeBSD | 14.0 | Tier A |
+| LinuxMint | 21 | Tier B |
+| Windows | 11 | Tier C |
+
+- Tier A = Full Supported
+- Tier B = non-Stable
+- Tier C = Experimental
 
 # Dependencies & Toolchains
 - libX11
