@@ -1,4 +1,5 @@
-include config.mk
+include tools/config.mk
+include tools/format.mk
 
 # Files, program and header list
 SRCS	= src/lithium.cc

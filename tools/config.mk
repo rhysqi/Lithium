@@ -24,7 +24,7 @@ SHARED		= -shared -o
 
 STATIC-ARC	= llvm-ar15 rcsU
 
-.PHONY: check_dir  package
+.PHONY: check_dir package
 
 package:
 	@if [ ! -d "$(_PKG_)" ]; then \
