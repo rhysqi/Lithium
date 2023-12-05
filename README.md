@@ -18,7 +18,7 @@ Good for C/C++ and Assembly language.
 | Windows | 11 | Tier C |
 
 - Tier A = Full Supported
-- Tier B = non-Stable
+- Tier B = Half Supported
 - Tier C = Experimental
 
 # Dependencies & Toolchains
