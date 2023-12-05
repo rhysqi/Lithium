@@ -29,47 +29,20 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../include/Lt-Core.hh"
-#include "../../include/Lt-Component.hh"
+#ifndef LT_FONT_HH
+#define LT_FONT_HH
 
 #ifdef _X11
 
-void Lt_Core_X11(volatile int STATE, const char *N) {
-
-    Lt_X11 XCore;
-    Lt_Win XWin;
-
-    XCore.Dsp = XOpenDisplay(NULL);
-
-    int Scr  = DefaultScreen(XCore.Dsp);
-    int Root = RootWindow(XCore.Dsp, Scr);
-
-	if (STATE == 3 && XCore.Dsp != NULL) {
-		while (STATE != 1) {
-		    XNextEvent(XCore.Dsp, &XCore.Xe);
-		}
-	} else {
-	    printf("Cannot open display !\n");
-	    exit(1);
-	}
-
-    XCloseDisplay(XCore.Dsp);
-}
-
-void Lt_Read_X11(const char *FILE, const char *F_RD) {
-	if (F_RD != NULL) {
-	    fopen(F_RD, "r");
-	} else {
-	    printf("No file to read !\n");
-	}
-}
-
-void Lt_Write_X11(const char *FILE, const char *F_WR) {
-}
+void Lt_Font();
 
 #endif /* _X11 */
 
+
+// Win32 section
 #ifdef _WIN32
-void Lt_Core_Win32() {
-}
+
+
 #endif /* _WIN32 */
+
+#endif /* LT_FONT_HH */

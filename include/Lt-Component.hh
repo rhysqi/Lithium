@@ -1,22 +1,22 @@
 /*
  * BSD 3-Clause License
- * 
+ *
  * Copyright (c) 2023, Risky Akbar
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of the copyright holder nor the names of its
  *    contributors may be used to endorse or promote products derived from
  *    this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,21 +35,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef _X11_
-#include <X11/Xlib.h>
+#ifdef _X11
 #include <X11/Xatom.h>
+#include <X11/Xlib.h>
 
 // Declare component variable
-typedef struct Lt_X11{
+typedef struct Lt_X11
+{
     Display *Dsp;
-    Window Win;
-    XEvent Xe;
+    Window   Win;
+    XEvent   Xe;
 } Lt_X11;
 
-typedef struct Lt_Win{
+typedef struct Lt_Win
+{
     Lt_X11 Lt_D;
-    int Scr = DefaultScreen(Lt_D.Dsp);
-    int Root = RootWindow(Lt_D.Dsp, Scr);
+    int	   Scr	= DefaultScreen(Lt_D.Dsp);
+    int	   Root = RootWindow(Lt_D.Dsp, Scr);
 } Lt_Win;
 
 // Function component declarations
@@ -69,11 +71,10 @@ void Lt_Radio_Button_X11();
 void Lt_Menu_X11();
 void Lt_MenuOverlay_X11();
 void Lt_MenuItem_X11();
-#endif /* _X11_ */
-
+#endif /* _X11 */
 
 // Win32 section
-#ifdef _WIN32_
+#ifdef _WIN32
 #include <Windows.h>
 
 // Function component declarations
@@ -94,6 +95,6 @@ void Lt_Menu_Win32();
 void Lt_MenuOverlay_Win32();
 void Lt_MenuItem_Win32();
 
-#endif /* _WIN32_ */
+#endif /* _WIN32 */
 
 #endif /* LT_COMPONENT_HH */
