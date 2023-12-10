@@ -1,15 +1,27 @@
 # C/C++ Standard settings
-CXX			= clang++15
-CXSTD		= -std=c++17 -stdlib=libc++
+CXX			=	clang++15
+CXSTD		=	-std=c++17 -stdlib=libc++
 
-CXFLAGS		= -fno-strict-aliasing -O3 -flto
-CXFLAGS		+= -fstack-protector-strong -fvectorize -fslp-vectorize
-CXFLAGS		+= -v
+CXFLAGS		=	-O3 -flto
+CXFLAGS		+=	-fstack-protector-strong -fvectorize -fslp-vectorize \
+				-fstrict-enums -fsplit-lto-unit -fsplit-lto-unit \
+				-fstrict-float-cast-overflow -fstrict-vtable-pointers -fsplit-stack\
+				-fconvergent-functions -fenable-matrix
 
-CXLIBS		= -I/usr/local/include -L/usr/local/lib
-CXLIBS		+= -I/usr/include -L/usr/lib
+CXFLAGS		+=	-fno-fixed-point -fno-strict-aliasing -fno-exception \
+				-fno-spell-checking -fno-rtti -fno-rtti-data -fno-access-control \
+				-fno-addrsig -fno-gnu-inline-asm
 
-CXARGS		= -lX11
+CXFLAGS		+=	-mstack-arg-probe -mstackrealign -msoft-float -mno-lvi-cfi \
+				-mlvi-cfi -mlvi-hardening
+
+CXFLAGS		+=	-Wpedantic
+CXFLAGS		+=	-v
+
+CXLIBS		=	-I/usr/local/include -L/usr/local/lib
+CXLIBS		+=	-I/usr/include -L/usr/lib
+
+CXARGS		=	-lX11
 
 # Folder cache list
 LIB			:= lib
