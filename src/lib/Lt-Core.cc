@@ -30,46 +30,50 @@
  */
 
 #include "../../include/Lt-Core.hh"
-#include "../../include/Lt-Component.hh"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <memory.h>
+
+typedef void(*f) (void (*f) (int)); // void callback
 
 #ifdef _X11
+#include <X11/Xlib.h>
 
 void Lt_Core_X11(volatile int STATE, const char *N) {
 
-    Lt_X11 XCore;
-    Lt_Win XWin;
-
-    XCore.Dsp = XOpenDisplay(NULL);
-
-    int Scr  = DefaultScreen(XCore.Dsp);
-    int Root = RootWindow(XCore.Dsp, Scr);
-
-	if (STATE == 3 && XCore.Dsp != NULL) {
-		while (STATE != 1) {
-		    XNextEvent(XCore.Dsp, &XCore.Xe);
-		}
-	} else {
-	    printf("Cannot open display !\n");
-	    exit(1);
-	}
-
-    XCloseDisplay(XCore.Dsp);
+	while(1);
 }
 
 void Lt_Read_X11(const char *FILE, const char *F_RD) {
 	if (F_RD != NULL) {
 	    fopen(F_RD, "r");
 	} else {
-	    printf("No file to read !\n");
+	    printf("No file to open !\n");
 	}
 }
 
 void Lt_Write_X11(const char *FILE, const char *F_WR) {
+	if (FILE != F_WR) {
+		
+	} else {
+		printf("File failed to write !\n");
+	}
+}
+
+void Lt_New_X11(const char *FILE){
+	if(FILE != NULL){
+		FILE = NULL;
+	}
 }
 
 #endif /* _X11 */
 
 #ifdef _WIN32
-void Lt_Core_Win32() {
+#include <Windows.h>
+
+void Lt_Core_Win32(volatile int STATE) {
+
 }
 #endif /* _WIN32 */

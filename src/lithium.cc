@@ -29,37 +29,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// #include "../include/lithium.hh"
+#include "../include/lithium.hh"
 
 #ifdef _X11
-#include <stdio.h>
 int main(int argc, const char *argv[]) {
 
-    // int STATE = 3;
+    printf("Hello Test!\n");
 
-    // Lt_Core_X11(STATE,"Lithium");
-
-    FILE *file;
-    char  data[] = "Contoh tulisan ke dalam file.";
-
-    // Membuka file untuk ditulis dalam mode teks ("w")
-    file = fopen("example.txt", "w");
-
-	if (file == NULL) {
-	    perror("Gagal membuka file");
-	    return 1;
-    }
-
-    // Menulis data ke dalam file dalam format teks
-    fprintf(file, "%s", data);
-
-    // Menutup file
-    fclose(file);
-
-    printf("Data berhasil ditulis ke dalam file.\n");
-
-    return 0;
+	return 0;
 }
+
 #endif /* _X11 */
 
 #ifdef _WIN32
@@ -67,9 +46,27 @@ int main(int argc, const char *argv[]) {
 #ifndef UNICODE
 #define UNICODE
 #endif
-#include <Windows.h>
 
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	switch (uMsg) {
+	case WM_DESTROY:
+	    PostQuitMessage(0);
+	    return 0;
+
+	    case WM_PAINT: {
+		PAINTSTRUCT ps;
+		HDC	    hdc = BeginPaint(hwnd, &ps);
+
+		// All painting occurs here, between BeginPaint and EndPaint.
+
+		FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+
+		EndPaint(hwnd, &ps);
+	    }
+	    return 0;
+	}
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
     // Register the window class.
@@ -116,24 +113,4 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     return 0;
 }
 
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-	switch (uMsg) {
-	case WM_DESTROY:
-	    PostQuitMessage(0);
-	    return 0;
-
-	    case WM_PAINT: {
-		PAINTSTRUCT ps;
-		HDC	    hdc = BeginPaint(hwnd, &ps);
-
-		// All painting occurs here, between BeginPaint and EndPaint.
-
-		FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
-
-		EndPaint(hwnd, &ps);
-	    }
-	    return 0;
-	}
-    return DefWindowProc(hwnd, uMsg, wParam, lParam);
-}
 #endif /* _WIN32 */
