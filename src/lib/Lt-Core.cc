@@ -74,6 +74,6 @@ void Lt_New_X11(const char *FILE){
 #include <Windows.h>
 
 void Lt_Core_Win32(volatile int STATE) {
-
+	
 }
 #endif /* _WIN32 */
