@@ -35,5 +35,6 @@
 #include "Lt-Component.hh"
 #include "Lt-Core.hh"
 #include "Lt-Parser.hh"
+#include "Lt-Font.hh"
 
 #endif /* LITHIUM_HH */
