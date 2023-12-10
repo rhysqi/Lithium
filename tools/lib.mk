@@ -4,30 +4,30 @@ include tools/config.mk
 SRCS	= src/lithium.cc
 
 LIBS	= src/lib
-LIBS_T	= src/lib/Lt-Core.cc
-LIBS_T	+= src/lib/Lt-Parser.cc
-LIBS_T	+= src/lib/Lt-Component.cc
 
-.PHONY: shared static
-static: check_dir
-	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Core.cc -o $(BUILD)/Lt-Core.o $(CXFLAGS) $(CXARGS) $(CXLIBS)
-	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Component.cc -o $(BUILD)/Lt-Comp.o $(CXFLAGS) $(CXARGS) $(CXLIBS)
-	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Parser.cc -o $(BUILD)/Lt-Parser.o $(CXFLAGS) $(CXARGS) $(CXLIBS)
+# Lib options
+INDENT_RUN	= -c -fPIE
+SHARED		= -shared -o
 
-	$(STATIC-ARC) $(LIB)/libLithium.a $(wildcard $(BUILD)/*.o)
+STATIC-ARC	= llvm-ar15 rcsU
 
-shared: check_dir
-	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Core.cc -o $(BUILD)/Lt-Core.o $(CXFLAGS) $(CXARGS) $(CXLIBS)
-	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Component.cc -o $(BUILD)/Lt-Comp.o $(CXFLAGS) $(CXARGS) $(CXLIBS)
-	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Parser.cc -o $(BUILD)/Lt-Parser.o $(CXFLAGS) $(CXARGS) $(CXLIBS)
-
-	$(CXX) $(SHARED) $(LIB)/libLithium.so $(wildcard $(BUILD)/*.o) \
-	$(CXSTD) $(CXLIBS) $(CXFLAGS) $(CXARGS)
+.PHONY: shared-win32 static-win32 shared-X11 static-X11
 
 shared-win32: check_dir
-	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Core.cc -o $(BUILD)/Lt-Core.o $(CXFLAGS) $(CXARGS) $(CXLIBS)
-	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Component.cc -o $(BUILD)/Lt-Comp.o $(CXFLAGS) $(CXARGS) $(CXLIBS)
-	$(CXX) $(INDENT_RUN) $(LIBS)/Lt-Parser.cc -o $(BUILD)/Lt-Parser.o $(CXFLAGS) $(CXARGS) $(CXLIBS)
+	$(CXX) $(LIBS) \
+	$(INDENT_RUN) $(SHARED) \
+	
+	-D_X11
 
-	$(CXX) $(SHARED) $(LIB)/libLithium.dll $(wildcard $(BUILD)/*.o) \
-	$(CXSTD) $(CXLIBS) $(CXFLAGS) $(CXARGS)
+static-win32: check_dir
+	$(CXX) $() \
+	-D_X11
+
+shared-X11: check_dir
+	$(CXX) \
+	-D_WIN32
+
+static-X11: check_dir
+	$(CXX) \
+	-D_WIN32
+	

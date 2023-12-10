@@ -1,6 +1,6 @@
 # C/C++ Standard settings
 CXX			=	clang++15
-CXSTD		=	-std=c++17 -stdlib=libc++
+CXSTD		=	-std=c++20 -stdlib=libc++
 
 CXFLAGS		=	-O3 -flto
 CXFLAGS		+=	-fstack-protector-strong -fvectorize -fslp-vectorize \
@@ -15,35 +15,34 @@ CXFLAGS		+=	-fno-fixed-point -fno-strict-aliasing -fno-exception \
 CXFLAGS		+=	-mstack-arg-probe -mstackrealign -msoft-float -mno-lvi-cfi \
 				-mlvi-cfi -mlvi-hardening
 
-CXFLAGS		+=	-Wpedantic
-CXFLAGS		+=	-v
+CXFLAGS		+=	-Wall -Wno-pedantic
+CXFLAGS		+=	-v -H
 
-CXLIBS		=	-I/usr/local/include -L/usr/local/lib
-CXLIBS		+=	-I/usr/include -L/usr/lib
+# X11
+CXLIBS_X11	=	-I/usr/local/include -L/usr/local/lib
+CXLIBS_X11	+=	-I/usr/include -L/usr/lib
 
-CXARGS		=	-lX11
+CXARGS_X11	=	-lX11 -D_X11
+
+# W32
+CXARGS_W32	=	-mwindows -D_WIN32 \
+				-luser32 -lGdi32
 
 # Folder cache list
 LIB			:= lib
-_PKG_		:= build/package
+PKG			:= build/package
 
 BUILD		= build
 BIN			= bin
 
-# Lib options
-INDENT_RUN	= -c -fPIE
-SHARED		= -shared -o
-
-STATIC-ARC	= llvm-ar15 rcsU
-
 .PHONY: check_dir package
 
 package:
-	@if [ ! -d "$(_PKG_)" ]; then \
-		mkdir -p $(_PKG_); \
-		echo "Directory $(_PKG_) created..."; \
+	@if [ ! -d "$(PKG)" ]; then \
+		mkdir -p $(PKG); \
+		echo "Directory $(PKG) created..."; \
 	else \
-		echo "Directory $(_PKG_) already exists."; \
+		echo "Directory $(PKG) already exists."; \
 	fi
 
 check_dir:
