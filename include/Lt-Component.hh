@@ -32,36 +32,16 @@
 #ifndef LT_COMPONENT_HH
 #define LT_COMPONENT_HH
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #ifdef _X11
-#include <X11/Xatom.h>
-#include <X11/Xlib.h>
-
-// Declare component variable
-typedef struct Lt_X11
-{
-    Display *Dsp;
-    Window   Win;
-    XEvent   Xe;
-} Lt_X11;
-
-typedef struct Lt_Win
-{
-    Lt_X11 Lt_D;
-    int	   Scr	= DefaultScreen(Lt_D.Dsp);
-    int	   Root = RootWindow(Lt_D.Dsp, Scr);
-} Lt_Win;
 
 // Function component declarations
-void Lt_Window_X11(Lt_X11, Lt_Win, const char *Lt_TitleX, const char *Lt_Cols);
-void Lt_Window_Title_X11();
-void Lt_WindowBG_X11();
+void Lt_Window_X11(int, int);
+void Lt_Window_Title_X11(const char *);
+void Lt_WindowBG_X11(const char *);
 void Lt_WindowParent_X11();
 
-void Lt_InputBox_X11();
-void Lt_InputBox_Multiline_X11();
+void Lt_InputBox_X11(int, int);
+void Lt_InputBox_Multiline_X11(int, int);
 
 void Lt_Button_X11();
 void Lt_ButtonParent_X11();
@@ -71,6 +51,7 @@ void Lt_Radio_Button_X11();
 void Lt_Menu_X11();
 void Lt_MenuOverlay_X11();
 void Lt_MenuItem_X11();
+
 #endif /* _X11 */
 
 // Win32 section

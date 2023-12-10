@@ -34,14 +34,18 @@
 
 #ifdef _X11
 
-void Lt_Font();
+void Lt_Font_X11();
+void Lt_FontBitmap_X11();
+void Lt_FontRender_X11();
 
 #endif /* _X11 */
-
 
 // Win32 section
 #ifdef _WIN32
 
+void Lt_Font_Win32();
+void Lt_FontBitmap_Win32();
+void Lt_FontRender_Win32();
 
 #endif /* _WIN32 */
 

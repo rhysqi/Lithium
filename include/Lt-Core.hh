@@ -32,17 +32,14 @@
 #ifndef LT_CORE_HH
 #define LT_CORE_HH
 
-#include <stdio.h>
-#include <stdlib.h>
-
 // X11 section
 #ifdef _X11
-#include <X11/Xlib.h>
 
 // Function core X11 declarations
-void Lt_Core_X11(volatile int STATE, const char *Lt_N);
-void Lt_Read_X11(const char *FILE, const char *F_RD);
-void Lt_Write_X11(const char *FILE, const char *F_WR);
+void Lt_Core_X11(volatile int , const char *);
+void Lt_Read_X11(const char *, const char *);
+void Lt_Write_X11(const char *, const char *);
+void Lt_New_X11(const char *);
 void Lt_LineCounter_X11();
 
 void Lt_Backups_X11();
@@ -53,12 +50,12 @@ void Lt_Setting_X11();
 
 // Win32 section
 #ifdef _WIN32
-#include <Windows.h>
 
 // Function core win32 declarations
-void Lt_Core_Win32();
+void Lt_Core_Win32(volatile int);
 void Lt_Read_Win32();
 void Lt_Write_Win32();
+void Lt_New_Win32(const char *FILE);
 void Lt_LineCounter_Win32();
 
 void Lt_Backups_Win32();

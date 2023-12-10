@@ -32,18 +32,6 @@
 #ifndef LT_PARSER_HH
 #define LT_PARSER_HH
 
-#include <memory.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-// Parsing data types
-typedef struct Lt_Parse
-{
-    const char *Args;
-    const char *SYM;
-} D_Lt_Parse;
-
 // Function parser declaration
 void Lt_Parser();
 void Lt_ParseSym();
