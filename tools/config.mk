@@ -1,5 +1,5 @@
 # C/C++ Standard settings
-CXX			=	clang++15
+CXX			=	clang++
 CXSTD		=	-std=c++20 -stdlib=libc++
 
 CXFLAGS		=	-O3 -flto

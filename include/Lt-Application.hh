@@ -1,0 +1,6 @@
+#ifndef LT_APPLICATION_HH
+#define LT_APPLICATION_HH
+
+
+
+#endif /* LT_APPLICATION_HH */

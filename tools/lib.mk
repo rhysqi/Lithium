@@ -3,7 +3,7 @@ include tools/config.mk
 # Files, program and header list
 SRCS	= src/lithium.cc
 
-LIBS	= src/lib
+LIBS	= lib
 
 # Lib options
 INDENT_RUN	=	-c -fPIE
