@@ -15,7 +15,7 @@ Good for C/C++ and Assembly language.
 |  :---:  | :---: | :---: |
 | FreeBSD | 14.0 | Tier A |
 | LinuxMint | 21 | Tier B |
-| Windows | 11 | Tier C |
+| Windows | 11 | Tier A |
 
 - Tier A = Full Supported
 - Tier B = Half Supported
