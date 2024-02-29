@@ -23,7 +23,7 @@ Good for C/C++ and Assembly language.
 
 # Dependencies & Toolchains
 - libX11
-- LLVM 15.0
+- LLVM 16.0.4
 - gmake
 - CMake 3.2x
 - Windows SDK
