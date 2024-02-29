@@ -15,5 +15,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 #ifdef _UNIX
 
+int main(int argc, const char *argv[]){
+	
+	
+	return 0;
+}
 
 #endif /* _UNIX */
