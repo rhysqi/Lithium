@@ -1,6 +1,5 @@
 # Lithium
-Text editor that using native X11 and Win32. Suitable in Unix/Unix-like environment. <br>
-Good for C/C++ and Assembly language.
+Text editor that using native Win32 and X11. Suitable in Unix/Unix-like and Windows environment. <br>
 
 # Features
 - File format detection (Upcoming)
@@ -13,22 +12,30 @@ Good for C/C++ and Assembly language.
 # Supported Platform
 | Platform | Version | Tier |
 |  :---:  | :---: | :---: |
+| Windows | 11 | Tier A |
 | FreeBSD | 14.0 | Tier A |
 | LinuxMint | 21 | Tier B |
-| Windows | 11 | Tier A |
 
-- Tier A = Full Supported
-- Tier B = Half Supported
-- Tier C = Experimental
+- Tier A = Supported
+- Tier B = Experimental
 
 # Dependencies & Toolchains
+### Dependencies
 - libX11
+- Windows API
+
+### Toolchains
 - LLVM 16.0.4
 - gmake
 - CMake 3.2x
-- Windows SDK
 
 # Build
+
+### <b>Windows build</b> <br>
+Makefile
+```
+gmake buildware-win32
+```
 
 ### <b>Unix/Unix-like build</b> <br>
 Makefile
@@ -44,10 +51,4 @@ cmake -DCMAKE_C_COMPILER=/path/to/clang \
       -DCMAKE_CXX_COMPILER=/path/to/clang++ \
       ..
 make
-```
-
-### <b>Windows build</b> <br>
-Makefile
-```
-gmake buildware-win32
 ```
