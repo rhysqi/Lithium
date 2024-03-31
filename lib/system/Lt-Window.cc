@@ -1,7 +1,6 @@
 #include "../../include/Lt-Graphics.hh"
 #include "../../include/Lt-System.hh"
 
-#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,9 +13,6 @@
 #include <WinUser.h>
 #include <wincrypt.h>
 
-void Window(Lt_PWindow_t Window_t){
-	
-}
 
 #endif /* WIN32 */
 

@@ -1,11 +1,12 @@
 #include "../include/Lt-Application.hh"
 
-#include "Lt-Init.hh"
-#include "Lt-Layout.hh"
+#include "Lt-Module.hh"
+#include "Lt-Interface.hh"
 
 #ifdef _WIN32
 
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nShowCmd){
+int WINAPI
+wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nShowCmd){
 
 	
 	return 0;
