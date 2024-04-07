@@ -1,4 +1,4 @@
-#include "../../include/Lt-Graphics.hh"
+#include "../../include/Lt-System.hh"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,17 +10,13 @@
 
 #include <Windows.h>
 #include <WinUser.h>
+#include <WinBase.h>
+#include <winnt.h>
 #include <wincrypt.h>
+#include <process.h>
+#include <processthreadsapi.h>
+#include <threads.h>
 
-void ACT_WIN_BUFFER(){
-	
-}
-
-int Lt_Graphics::Window(){
-
-	ACT_WIN_BUFFER();
-	return 0;
-}
 
 #endif /* WIN32 */
 

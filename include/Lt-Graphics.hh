@@ -3,10 +3,7 @@
 
 namespace Lt_Graphics {
 
-	
-	namespace Font {
-		
-	}
+	int Window(void );
 }
 
 #endif /* LT_GRAPHICS_HH */
