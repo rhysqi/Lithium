@@ -1,2 +1,2 @@
 # Lithium
-Text editor using Win32 API.
+Text editor using Windows API.
