@@ -1,4 +1,5 @@
 #include "Lt-Write.h"
+#include <winerror.h>
 
 #ifdef _WIN32
 
@@ -10,12 +11,6 @@
 int Lt_WriteFile(const char* FileName)
 {
 	
-	return 0;
-}
-
-int Lt_ReadFile(const char *FileName)
-{
-
 	return 0;
 }
 

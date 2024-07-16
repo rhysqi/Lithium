@@ -3,9 +3,9 @@
 
 #ifdef _WIN32
 
-#define KeyPress 0x001211
-#define KeyRelease 0x001212
-#define KeyContinous 0x001213
+#define KeyPress 0xff001211
+#define KeyRelease 0xff001212
+#define KeyContinous 0xff001213
 
 namespace Lt_System {
 	namespace IO {
@@ -15,7 +15,7 @@ namespace Lt_System {
 	}
 
 	namespace Event {
-		void Key_Entry(int KeyHC, int OnAction);
+		void Key_Entry(int KeyCode, int State);
 		void Shortcut();
 	}
 
