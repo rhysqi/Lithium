@@ -4,6 +4,7 @@
 namespace Lt_Graphics {
 	namespace Font {
 		void Load();
+		void UnLoad();
 	}
 }
 

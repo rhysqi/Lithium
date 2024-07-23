@@ -15,4 +15,5 @@ int Lt_ReadFile(const char *FileName)
 HWND Lt_ReadFileExtended(const char *FileName)
 {
 	
+	return 0;
 }

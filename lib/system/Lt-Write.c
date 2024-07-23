@@ -8,6 +8,8 @@
 #include <WinBase.h>
 #include <fileapi.h>
 
+#include <cuda_runtime.h>
+
 int Lt_WriteFile(const char* FileName)
 {
 	

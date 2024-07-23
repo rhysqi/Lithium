@@ -1,6 +1,6 @@
 section .text
-	global Lithium_x86_Entry
+	global Lt_Noble_MainEntry
 
 	extern @MessageBoxA
-Lithium_x86_Entry:
+Lt_Noble_MainEntry:
 	
