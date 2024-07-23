@@ -11,6 +11,7 @@
 
 int Lt_Font_Load()
 {
+	
 	return 0;
 }
 

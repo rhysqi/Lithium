@@ -18,9 +18,9 @@ BraceWrapping:
   AfterUnion: true
   AfterEnum: true
 
-  AfterClass: false
+  AfterClass: true
   AfterControlStatement: false
-  AfterFunction: false
+  AfterFunction: true
   AfterNamespace: false
 
   BeforeLambdaBody: true

@@ -1,10 +1,5 @@
 #include "../../include/Lt-System.hh"
 
-#include <malloc.h>
-
-#include <Windows.h>
-#include <Msi.h>
-
 class Lt_Init
 {
 	public:
