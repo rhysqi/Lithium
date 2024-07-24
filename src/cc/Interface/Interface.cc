@@ -1,4 +1,4 @@
-#include "../../include/Lt-System.hh"
+#include "../../../include/Lt-System.hh"
 
 class Lt_Init
 {

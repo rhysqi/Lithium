@@ -1,6 +1,6 @@
-include tools\config\asm-config.mk
-include tools\config\clang-config.mk
-include tools\config\llvm-config.mk
+include tools\build\asm-build.mk
+include tools\build\clang-build.mk
+include tools\build\llvm-build.mk
 
 # x86
 build-Win32-Debug:

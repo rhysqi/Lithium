@@ -1,5 +1,5 @@
 ; Declare the string constant as a global constant.
-@.str = private unnamed_addr constant [20 x i8] c"ssssssshello world\0A\00"
+@.str = private unnamed_addr constant [20 x i8] c"\0A\00"
 
 ; External declaration of the puts function
 declare i32 @puts(ptr nocapture) nounwind
