@@ -6,22 +6,23 @@
 #include <Windows.h>
 #include <winnt.h>
 
+#define WDS_USEDEFAULT 
+
 namespace Lithium_System {
+	// Diagnostic definition
 	namespace Diagnostic {
 		HANDLE FileWatcher(LPCWSTR lpFilepath);
-		HANDLE CPU_Usage(UINT64 uInterval);
-		
+		HANDLE CPU_Usage_Global(UINT32 uIntervalMiliSeconds);
+		HANDLE CPU_Usage_Local(UINT32 uIntervalMiliSeconds, HWND hWnd);
 	}
 
+	// Directory definition
 	namespace Directory {
 		HANDLE Create(LPCWSTR lpDirName, LPSECURITY_ATTRIBUTES saAttrSec);
 		HANDLE Remove(LPCWSTR lpDirName);
 	}
 
-	namespace Error {
-		INT ShowLastError();
-	}
-
+	// File definition
 	namespace File {
 		HANDLE Create(LPCWSTR FileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwFlagsAndAttribute);
 
@@ -34,6 +35,13 @@ namespace Lithium_System {
 		BOOL WriteEx(HANDLE hFile, LPCWSTR lpFileBuffer);
 	}
 
+	// Inform definition
+	namespace Inform {
+		INT ShowLastError();
+		INT ShowMessage(LPCWSTR lpMessage);
+	}
+
+	// Utililty definition
 	namespace Util {
 		UINT DisplayHeight();
 		UINT DisplayWidth();
