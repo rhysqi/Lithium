@@ -10,8 +10,8 @@
 #include <errhandlingapi.h>
 #include <minwinbase.h>
 
-// Aero system error message with messagebox
-INT Lithium_System::Error::ShowLastError()
+// Lithium system error message with messagebox
+INT Lithium_System::Inform::ShowLastError()
 {
 	DWORD errorCode = GetLastError();
 	WCHAR systemErrorMessage[512];
@@ -30,6 +30,16 @@ INT Lithium_System::Error::ShowLastError()
 	lstrcatW(fullErrorMessage,L"\0");
 
 	return MessageBoxW(NULL, fullErrorMessage, L"Error Code", MB_OK | MB_ICONERROR);
+}
+
+// Lithium system message with messagebox
+INT Lithium_System::Inform::ShowMessage(LPCWSTR lpMessage)
+{
+	if (!lpMessage) {
+		lpMessage = L"Message are null or not initialized";
+	}
+	
+	return MessageBoxW(NULL, lpMessage, L"Inform Message", MB_OK | MB_ICONINFORMATION);
 }
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
