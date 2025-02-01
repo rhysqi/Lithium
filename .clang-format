@@ -2,8 +2,11 @@
 Language: Cpp
 
 IndentWidth: 4
-UseTab: Never
-ColumnLimit: 120
+UseTab: Always
+ColumnLimit: 100
+
+BinPackParameters: false
+AllowAllParametersOfDeclarationOnNextLine: true
 
 AlignConsecutiveAssignments: true
 AlignConsecutiveMacros: true
@@ -23,7 +26,7 @@ BraceWrapping:
   AfterEnum: true
 
   AfterClass: false
-  AfterControlStatement: true
+  AfterControlStatement: false
   AfterFunction: true
   AfterNamespace: false
 
