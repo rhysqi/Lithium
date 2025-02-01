@@ -1,3 +1,4 @@
+#include <cstddef>
 #if defined(_WIN32) || defined(_WIN64)
 
 #ifndef UNICODE
@@ -16,8 +17,9 @@
 #include <minwindef.h>
 #include <dwmapi.h>
 
-#pragma comment(lib, "dwmapi.lib")
 #pragma comment(lib, "user32.lib")
+#pragma comment(lib, "gdi32.lib")
+#pragma comment(lib, "dwmapi.lib")
 
 LRESULT CALLBACK Base_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK SystemDefault_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -124,7 +126,7 @@ HWND Lithium_Window::DWM::Experimental(HINSTANCE hInstance)
 	DwmExtendFrameIntoClientArea(hWnd, &margs);
 	
 	if (hWnd == NULL) {
-        Lithium_System::Error::ShowLastError();
+        Lithium_System::Inform::ShowLastError();
 		return 0;
 	}
 
@@ -144,10 +146,8 @@ HWND Lithium_Window::DWM::Base(Window_t WindowData, BOOL bIsSessionStandalone)
 	wcw.lpszClassName = CLASS_NAME;
 	wcw.hInstance = NULL;
 
-	if (!WindowData.wpEvent) {
-		wcw.lpfnWndProc = Base_WinProc;
-	}
-	else {
+	wcw.lpfnWndProc = Base_WinProc;
+	if (WindowData.wpEvent) {
 		wcw.lpfnWndProc = WindowData.wpEvent;
 	}
 
@@ -163,7 +163,7 @@ HWND Lithium_Window::DWM::Base(Window_t WindowData, BOOL bIsSessionStandalone)
 	);
 
 	if (hWnd == NULL) {
-        Lithium_System::Error::ShowLastError();
+        Lithium_System::Inform::ShowLastError();
 		return 0;
 	}
 
@@ -188,11 +188,9 @@ HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStan
 	wcw.lpszClassName = CLASS_NAME;
 	wcw.hInstance = NULL;
 	wcw.hbrBackground = CreateSolidBrush(RGB(255, 255, 255));
+	wcw.lpfnWndProc = SystemDefault_WinProc;
 
-	if (!WindowData.wpEvent) {
-		wcw.lpfnWndProc = SystemDefault_WinProc;
-	}
-	else {
+	if (WindowData.wpEvent) {
 		wcw.lpfnWndProc = WindowData.wpEvent;
 	}
 
@@ -222,7 +220,7 @@ HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStan
 	#endif /* WINDOW_ENABLE_EXTEND */
 
 	if (hWnd == NULL) {
-        Lithium_System::Error::ShowLastError();
+        Lithium_System::Inform::ShowLastError();
 		return 0;
 	}
 
@@ -247,15 +245,14 @@ HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandal
 	wcw.lpszClassName = CLASS_NAME;
 	wcw.hInstance = NULL;
 	wcw.hbrBackground = CreateSolidBrush(RGB(0, 125, 125));
-	RegisterClassW(&wcw);
+	wcw.lpfnWndProc = SystemFlat_WinProc;
 
-	if (!WindowData.wpEvent) {
-		wcw.lpfnWndProc = SystemFlat_WinProc;
-	}
-	else {
+	if (WindowData.wpEvent) {
 		wcw.lpfnWndProc = WindowData.wpEvent;
 	}
 	
+	RegisterClassW(&wcw);
+
 	HWND hWnd;
 	
 	#if WINDOW_ENABLE_EXTEND
@@ -280,7 +277,7 @@ HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandal
 	#endif /* WINDOW_ENABLE_EXTEND */
 
 	if (hWnd == NULL) {
-        Lithium_System::Error::ShowLastError();
+        Lithium_System::Inform::ShowLastError();
 		return 0;
 	}
 
@@ -305,14 +302,13 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 	wcw.lpszClassName = CLASS_NAME;
 	wcw.hInstance = NULL;
 	wcw.hbrBackground = CreateSolidBrush(RGB(0, 125, 125));
-	RegisterClassW(&wcw);
+	wcw.lpfnWndProc = TilingMode_WinProc;
 
-	if (!WindowData.wpEvent) {
-		wcw.lpfnWndProc = TilingMode_WinProc;
-	}
-	else {
+	if (WindowData.wpEvent) {
 		wcw.lpfnWndProc = WindowData.wpEvent;
 	}
+
+	RegisterClassW(&wcw);
 	
 	HWND hWnd;
 
@@ -338,7 +334,7 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 	#endif /* WINDOW_ENABLE_EXTEND */
 
 	if (hWnd == NULL) {
-        Lithium_System::Error::ShowLastError();
+        Lithium_System::Inform::ShowLastError();
 		return 0;
 	}
 
@@ -353,6 +349,63 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 
 	return hWnd;
 }
+
+HWND Lithium_Window::DWM::TilingModeFlat(Window_t WindowData, BOOL bIsSessionStandalone)
+{
+	LPCWSTR CLASS_NAME = L"TilingModeFlat_Window";
+	WNDCLASSW wcw = { };
+
+	wcw.lpszClassName = CLASS_NAME;
+	wcw.hInstance = NULL;
+	wcw.hbrBackground = CreateSolidBrush(RGB(0, 125, 125));
+	wcw.lpfnWndProc = TilingMode_WinProc;
+	
+	if (WindowData.wpEvent) {
+		wcw.lpfnWndProc = WindowData.wpEvent;
+	}
+
+	RegisterClassW(&wcw);
+	
+	HWND hWnd;
+
+	#if WINDOW_ENABLE_EXTEND
+	hWnd = CreateWindowExW(
+		WindowData.dwExStyle, CLASS_NAME,
+		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, CW_USEDEFAULT,
+		800, 500,
+		NULL, NULL, 
+		NULL, NULL
+	);
+
+	#else
+	hWnd = CreateWindowW(
+		CLASS_NAME,
+		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, CW_USEDEFAULT,
+		800, 500,
+		NULL, NULL, 
+		NULL, NULL
+	);
+	#endif /* WINDOW_ENABLE_EXTEND */
+
+	if (hWnd == NULL) {
+        Lithium_System::Inform::ShowLastError();
+		return 0;
+	}
+
+	if (bIsSessionStandalone) {
+		MSG msg = { };
+		while (GetMessageW(&msg, NULL, 0, 0)) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		return nullptr;
+	}
+
+	return hWnd;
+}
+
 
 // Default Base Window Process
 LRESULT CALLBACK Base_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
