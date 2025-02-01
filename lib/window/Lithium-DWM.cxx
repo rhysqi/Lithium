@@ -19,6 +19,18 @@
 #pragma comment(lib, "dwmapi.lib")
 #pragma comment(lib, "user32.lib")
 
+LRESULT CALLBACK Base_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK SystemDefault_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK SystemFlat_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK TilingMode_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK TilingModeFlat_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+VOID Lithium_Window::DWM::EnableRoundedCorners(HWND hWnd) {
+    const DWORD DWMWA_WINDOW_CORNER_PREFERENCE = 100;
+    int cornerPreference = DWMWCP_DEFAULT; // DWMNCRP_ROUND_SMALL
+    DwmSetWindowAttribute(hWnd, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(cornerPreference));
+}
+
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch (uMsg)
@@ -34,7 +46,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             int screenHeight = GetSystemMetrics(SM_CYMAXIMIZED); // Screen height
             
             // Setup margins
-            int margin = 20; // Margin yang diinginkan
+            int margin = 20; // Margin size
             int windowWidth = screenWidth - (margin * 3);  // Window size (width) with margins
             int windowHeight = screenHeight - (margin * 3); // Window size (height) with margins
 
@@ -67,12 +79,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-VOID Lithium_Window::DWM::EnableRoundedCorners(HWND hWnd) {
-    const DWORD DWMWA_WINDOW_CORNER_PREFERENCE = 100;
-    int cornerPreference = DWMWCP_DEFAULT; // DWMNCRP_ROUND_SMALL
-    DwmSetWindowAttribute(hWnd, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(cornerPreference));
-}
-
 HWND Lithium_Window::DWM::Experimental(HINSTANCE hInstance)
 {
 	LPCWSTR CLASS_NAME = L"Experimental_Window";
@@ -89,7 +95,7 @@ HWND Lithium_Window::DWM::Experimental(HINSTANCE hInstance)
 
 	HWND hWnd;
 
-	#if ENABLE_EXTEND
+	#if WINDOW_ENABLE_EXTEND
 	hWnd = CreateWindowExW(
 		0, CLASS_NAME,
 		WindowName, WS_OVERLAPPEDWINDOW,
@@ -108,7 +114,7 @@ HWND Lithium_Window::DWM::Experimental(HINSTANCE hInstance)
 		NULL, NULL, 
 		hInstance, NULL
 	);
-	#endif /* ENABLE_EXTEND */
+	#endif /* WINDOW_ENABLE_EXTEND */
 
 	UINT8 marg_val = 0;
 	MARGINS margs = {
@@ -133,6 +139,18 @@ HWND Lithium_Window::DWM::Base(Window_t WindowData, BOOL bIsSessionStandalone)
 {
 	LPCWSTR CLASS_NAME = L"Base_Window";
 
+	WNDCLASSW wcw = { };
+
+	wcw.lpszClassName = CLASS_NAME;
+	wcw.hInstance = NULL;
+
+	if (!WindowData.wpEvent) {
+		wcw.lpfnWndProc = Base_WinProc;
+	}
+	else {
+		wcw.lpfnWndProc = WindowData.wpEvent;
+	}
+
 	HWND hWnd;
 
 	hWnd = CreateWindowW(
@@ -149,7 +167,7 @@ HWND Lithium_Window::DWM::Base(Window_t WindowData, BOOL bIsSessionStandalone)
 		return 0;
 	}
 
-	if (bIsSessionStandalone) {
+	if (bIsSessionStandalone || NULL) {
 		MSG msg = { };
 		while (GetMessageW(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);
@@ -169,13 +187,20 @@ HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStan
 
 	wcw.lpszClassName = CLASS_NAME;
 	wcw.hInstance = NULL;
-	wcw.lpfnWndProc = WindowProc;
 	wcw.hbrBackground = CreateSolidBrush(RGB(255, 255, 255));
+
+	if (!WindowData.wpEvent) {
+		wcw.lpfnWndProc = SystemDefault_WinProc;
+	}
+	else {
+		wcw.lpfnWndProc = WindowData.wpEvent;
+	}
+
 	RegisterClassW(&wcw);
 
 	HWND hWnd;
 
-	#if ENABLE_EXTEND
+	#if WINDOW_ENABLE_EXTEND
 	hWnd = CreateWindowExW(
 		0, CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
@@ -184,6 +209,7 @@ HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStan
 		NULL, NULL, 
 		NULL, NULL
 	);
+
 	#else
 	hWnd = CreateWindowW(
 		CLASS_NAME,
@@ -193,14 +219,14 @@ HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStan
 		NULL, NULL, 
 		NULL, NULL
 	);
-	#endif /* ENABLE_EXTEND */
+	#endif /* WINDOW_ENABLE_EXTEND */
 
 	if (hWnd == NULL) {
         Lithium_System::Error::ShowLastError();
 		return 0;
 	}
 
-	if (bIsSessionStandalone) {
+	if (bIsSessionStandalone || NULL) {
 		MSG msg = { };
 		while (GetMessageW(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);
@@ -220,13 +246,19 @@ HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandal
 
 	wcw.lpszClassName = CLASS_NAME;
 	wcw.hInstance = NULL;
-	wcw.lpfnWndProc = WindowProc;
 	wcw.hbrBackground = CreateSolidBrush(RGB(0, 125, 125));
 	RegisterClassW(&wcw);
+
+	if (!WindowData.wpEvent) {
+		wcw.lpfnWndProc = SystemFlat_WinProc;
+	}
+	else {
+		wcw.lpfnWndProc = WindowData.wpEvent;
+	}
 	
 	HWND hWnd;
 	
-	#if ENABLE_EXTEND
+	#if WINDOW_ENABLE_EXTEND
 	hWnd = CreateWindowExW(
 		0, CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
@@ -235,6 +267,7 @@ HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandal
 		NULL, NULL,
 		NULL, NULL
 	);
+
 	#else
 	hWnd = CreateWindowW(
 		CLASS_NAME,
@@ -244,14 +277,14 @@ HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandal
 		NULL, NULL, 
 		NULL, NULL
 	);
-	#endif /* ENABLE_EXTEND */
+	#endif /* WINDOW_ENABLE_EXTEND */
 
 	if (hWnd == NULL) {
         Lithium_System::Error::ShowLastError();
 		return 0;
 	}
 
-	if (bIsSessionStandalone) {
+	if (bIsSessionStandalone || NULL) {
 		MSG msg = { };
 		while (GetMessageW(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);
@@ -271,13 +304,19 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 
 	wcw.lpszClassName = CLASS_NAME;
 	wcw.hInstance = NULL;
-	wcw.lpfnWndProc = WindowProc;
 	wcw.hbrBackground = CreateSolidBrush(RGB(0, 125, 125));
 	RegisterClassW(&wcw);
+
+	if (!WindowData.wpEvent) {
+		wcw.lpfnWndProc = TilingMode_WinProc;
+	}
+	else {
+		wcw.lpfnWndProc = WindowData.wpEvent;
+	}
 	
 	HWND hWnd;
 
-	#if ENABLE_EXTEND
+	#if WINDOW_ENABLE_EXTEND
 	hWnd = CreateWindowExW(
 		0, CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
@@ -286,6 +325,7 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 		NULL, NULL, 
 		NULL, NULL
 	);
+
 	#else
 	hWnd = CreateWindowW(
 		CLASS_NAME,
@@ -295,14 +335,14 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 		NULL, NULL, 
 		NULL, NULL
 	);
-	#endif /* ENABLE_EXTEND */
+	#endif /* WINDOW_ENABLE_EXTEND */
 
 	if (hWnd == NULL) {
         Lithium_System::Error::ShowLastError();
 		return 0;
 	}
 
-	if (bIsSessionStandalone) {
+	if (bIsSessionStandalone || NULL) {
 		MSG msg = { };
 		while (GetMessageW(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);
@@ -312,6 +352,161 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 	}
 
 	return hWnd;
+}
+
+// Default Base Window Process
+LRESULT CALLBACK Base_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg) 
+	{
+		case WM_PAINT: {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+
+            // All painting occurs here, between BeginPaint and EndPaint.
+            FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW + 1));
+            EndPaint(hwnd, &ps);
+        }
+        return 0;
+		
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			return 0;
+	}
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+// Default SystemDefault Window Process
+LRESULT CALLBACK SystemDefault_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg) 
+	{
+		case WM_PAINT: {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+
+            // All painting occurs here, between BeginPaint and EndPaint.
+            FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW + 1));
+            EndPaint(hwnd, &ps);
+        }
+        return 0;
+		
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			return 0;
+	}
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+// Default SystemFlat Window Process
+LRESULT CALLBACK SystemFlat_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg) 
+	{
+		case WM_PAINT: {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+
+            // All painting occurs here, between BeginPaint and EndPaint.
+            FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW + 1));
+            EndPaint(hwnd, &ps);
+        }
+        return 0;
+		
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			return 0;
+	}
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+// Default Tiling Mode Window Process
+LRESULT CALLBACK TilingMode_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg) 
+	{
+		case WM_PAINT: {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+
+            // All painting occurs here, between BeginPaint and EndPaint.
+            FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW + 1));
+            EndPaint(hwnd, &ps);
+        }
+        return 0;
+
+		case WM_SIZE:
+			if (wParam == SIZE_MAXIMIZED) {
+				// If window maximiazed, changes size and add some gap with margins
+				INT screenWidth = GetSystemMetrics(SM_CXMAXIMIZED); // Screen width
+				INT screenHeight = GetSystemMetrics(SM_CYMAXIMIZED); // Screen height
+				
+				// Setup margins
+				INT margin = 20; // Margin size
+				INT windowWidth = screenWidth - (margin * 3);  // Window size (width) with margins
+				INT windowHeight = screenHeight - (margin * 3); // Window size (height) with margins
+
+				SetWindowPos(
+					hwnd, HWND_TOP,
+					margin, margin,
+					windowWidth, windowHeight,
+					SWP_NOZORDER | SWP_FRAMECHANGED
+				);
+			}
+			break;
+		
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			return 0;
+	}
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+// Default Tiling Flat Mode Window Process
+LRESULT CALLBACK TilingModeFlat_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg) 
+	{
+		case WM_PAINT: {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+
+            // All painting occurs here, between BeginPaint and EndPaint.
+            FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW + 1));
+            EndPaint(hwnd, &ps);
+        }
+        return 0;
+
+		case WM_SIZE:
+			if (wParam == SIZE_MAXIMIZED) {
+				// If window maximiazed, changes size and add some gap with margins
+				INT screenWidth = GetSystemMetrics(SM_CXMAXIMIZED); // Screen width
+				INT screenHeight = GetSystemMetrics(SM_CYMAXIMIZED); // Screen height
+				
+				// Setup margins
+				INT margin = 20; // Margin size
+				INT windowWidth = screenWidth - (margin * 3);  // Window size (width) with margins
+				INT windowHeight = screenHeight - (margin * 3); // Window size (height) with margins
+
+				SetWindowPos(
+					hwnd, HWND_TOP,
+					margin, margin,
+					windowWidth, windowHeight,
+					SWP_NOZORDER | SWP_FRAMECHANGED
+				);
+			}
+			break;
+
+		case WM_NCCALCSIZE: {
+			NCCALCSIZE_PARAMS *npcp = (NCCALCSIZE_PARAMS*)lParam;
+			npcp->rgrc[0].top = 0;
+		}
+		
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			return 0;
+	}
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
