@@ -10,6 +10,28 @@
 #include <errhandlingapi.h>
 #include <minwinbase.h>
 
+// Lithium system error message with messagebox but not terminated process
+INT Lithium_System::Inform::ShowErrorWithoutTerminate()
+{
+	DWORD errorCode = GetLastError();
+	WCHAR systemErrorMessage[512];
+	WCHAR fullErrorMessage[1024] = { 0 };
+
+	FormatMessageW(
+		FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL, errorCode, 0,
+		systemErrorMessage,
+		sizeof(systemErrorMessage) / sizeof(WCHAR),
+		NULL
+	);
+
+	lstrcatW(fullErrorMessage, L"System Error Message:\n");
+	lstrcatW(fullErrorMessage, systemErrorMessage);
+	lstrcatW(fullErrorMessage,L"\0");
+
+	return MessageBoxW(NULL, fullErrorMessage, L"Error Code", MB_OK | MB_ICONERROR);
+}
+
 // Lithium system error message with messagebox
 INT Lithium_System::Inform::ShowLastError()
 {
@@ -29,7 +51,9 @@ INT Lithium_System::Inform::ShowLastError()
 	lstrcatW(fullErrorMessage, systemErrorMessage);
 	lstrcatW(fullErrorMessage,L"\0");
 
-	return MessageBoxW(NULL, fullErrorMessage, L"Error Code", MB_OK | MB_ICONERROR);
+	MessageBoxW(NULL, fullErrorMessage, L"Error Code", MB_OK | MB_ICONERROR);
+	ExitProcess(0);
+	return 0;
 }
 
 // Lithium system message with messagebox
