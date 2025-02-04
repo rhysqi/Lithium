@@ -1,4 +1,3 @@
-#include <cstddef>
 #if defined(_WIN32) || defined(_WIN64)
 
 #ifndef UNICODE
@@ -27,8 +26,9 @@ LRESULT CALLBACK SystemFlat_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 LRESULT CALLBACK TilingMode_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK TilingModeFlat_WinProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-VOID Lithium_Window::DWM::EnableRoundedCorners(HWND hWnd) {
-    const DWORD DWMWA_WINDOW_CORNER_PREFERENCE = 100;
+VOID Lithium_Window::DWM::EnableRoundedCorners(HWND hWnd)
+{
+    DWORD DWMWA_WINDOW_CORNER_PREFERENCE = 100;
     int cornerPreference = DWMWCP_DEFAULT; // DWMNCRP_ROUND_SMALL
     DwmSetWindowAttribute(hWnd, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(cornerPreference));
 }
@@ -63,18 +63,18 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     case WM_PAINT:
         {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hwnd, &ps);
+            // PAINTSTRUCT ps;
+            // HDC hdc = BeginPaint(hwnd, &ps);
 
-			HBRUSH BackgroundColor = CreateSolidBrush(
-				RGB(120, 120, 120)
-			);
+			// HBRUSH BackgroundColor = CreateSolidBrush(
+			// 	RGB(120, 120, 120)
+			// );
 
-            // All painting occurs here, between BeginPaint and EndPaint.
-            FillRect(hdc, &ps.rcPaint, BackgroundColor);
+            // // All painting occurs here, between BeginPaint and EndPaint.
+            // FillRect(hdc, &ps.rcPaint, BackgroundColor);
 			
-			DeleteObject(BackgroundColor);
-            EndPaint(hwnd, &ps);
+			// DeleteObject(BackgroundColor);
+            // EndPaint(hwnd, &ps);
         }
         return 0;
 	}
@@ -91,7 +91,7 @@ HWND Lithium_Window::DWM::Experimental(HINSTANCE hInstance)
 	wcw.lpszClassName = CLASS_NAME;
 	wcw.hInstance = NULL;
 	wcw.lpfnWndProc = WindowProc;
-	wcw.hbrBackground = CreateSolidBrush(RGB(0, 125, 125));
+	wcw.hbrBackground = (HBRUSH)GetDesktopWindow;
 
 	RegisterClassW(&wcw);
 
@@ -137,7 +137,7 @@ HWND Lithium_Window::DWM::Experimental(HINSTANCE hInstance)
 }
 
 // Lithium Base Window
-HWND Lithium_Window::DWM::Base(Window_t WindowData, BOOL bIsSessionStandalone)
+HWND Lithium_Window::DWM::Base(Window_t WindowData)
 {
 	LPCWSTR CLASS_NAME = L"Base_Window";
 
@@ -158,7 +158,7 @@ HWND Lithium_Window::DWM::Base(Window_t WindowData, BOOL bIsSessionStandalone)
 		WS_OVERLAPPEDWINDOW,
 		WindowData.uPOSX, WindowData.uPOSY,
 		WindowData.uWidth, WindowData.uHeight,
-		WindowData.hwParent, NULL,
+		WindowData.hParent, NULL,
 		NULL, NULL
 	);
 
@@ -167,7 +167,7 @@ HWND Lithium_Window::DWM::Base(Window_t WindowData, BOOL bIsSessionStandalone)
 		return 0;
 	}
 
-	if (bIsSessionStandalone || NULL) {
+	if (WindowData.bIsSessionStandalone) {
 		MSG msg = { };
 		while (GetMessageW(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);
@@ -180,7 +180,7 @@ HWND Lithium_Window::DWM::Base(Window_t WindowData, BOOL bIsSessionStandalone)
 }
 
 // System Default Window
-HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStandalone)
+HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData)
 {
 	LPCWSTR CLASS_NAME = L"SystemDefault_Window";
 	WNDCLASSW wcw = { };
@@ -200,9 +200,9 @@ HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStan
 
 	#if WINDOW_ENABLE_EXTEND
 	hWnd = CreateWindowExW(
-		0, CLASS_NAME,
+		WindowData.dwExStyle, CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		WindowData.uPOSX, WindowData.uPOSY,
 		800, 500,
 		NULL, NULL, 
 		NULL, NULL
@@ -212,9 +212,9 @@ HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStan
 	hWnd = CreateWindowW(
 		CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		WindowData.uPOSX, WindowData.uPOSY,
 		800, 500,
-		NULL, NULL, 
+		NULL, NULL,
 		NULL, NULL
 	);
 	#endif /* WINDOW_ENABLE_EXTEND */
@@ -224,7 +224,7 @@ HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStan
 		return 0;
 	}
 
-	if (bIsSessionStandalone || NULL) {
+	if (WindowData.bIsSessionStandalone) {
 		MSG msg = { };
 		while (GetMessageW(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);
@@ -237,7 +237,7 @@ HWND Lithium_Window::DWM::SystemDefault(Window_t WindowData, BOOL bIsSessionStan
 }
 
 // System Flat Window
-HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandalone)
+HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData)
 {
 	LPCWSTR CLASS_NAME = L"SystemFlat_Window";
 	WNDCLASSW wcw = { };
@@ -257,11 +257,11 @@ HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandal
 	
 	#if WINDOW_ENABLE_EXTEND
 	hWnd = CreateWindowExW(
-		0, CLASS_NAME,
+		WindowData.dwExStyle, CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		WindowData.uPOSX, WindowData.uPOSY,
 		800, 500,
-		NULL, NULL,
+		NULL, NULL, 
 		NULL, NULL
 	);
 
@@ -269,9 +269,9 @@ HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandal
 	hWnd = CreateWindowW(
 		CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		WindowData.uPOSX, WindowData.uPOSY,
 		800, 500,
-		NULL, NULL, 
+		NULL, NULL,
 		NULL, NULL
 	);
 	#endif /* WINDOW_ENABLE_EXTEND */
@@ -281,7 +281,7 @@ HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandal
 		return 0;
 	}
 
-	if (bIsSessionStandalone || NULL) {
+	if (WindowData.bIsSessionStandalone) {
 		MSG msg = { };
 		while (GetMessageW(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);
@@ -294,7 +294,7 @@ HWND Lithium_Window::DWM::SystemFlat(Window_t WindowData, BOOL bIsSessionStandal
 }
 
 // Tilling mode Window
-HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandalone)
+HWND Lithium_Window::DWM::TilingMode(Window_t WindowData)
 {
 	LPCWSTR CLASS_NAME = L"TilingMode_Window";
 	WNDCLASSW wcw = { };
@@ -314,9 +314,9 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 
 	#if WINDOW_ENABLE_EXTEND
 	hWnd = CreateWindowExW(
-		0, CLASS_NAME,
+		WindowData.dwExStyle, CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		WindowData.uPOSX, WindowData.uPOSY,
 		800, 500,
 		NULL, NULL, 
 		NULL, NULL
@@ -326,9 +326,9 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 	hWnd = CreateWindowW(
 		CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		WindowData.uPOSX, WindowData.uPOSY,
 		800, 500,
-		NULL, NULL, 
+		NULL, NULL,
 		NULL, NULL
 	);
 	#endif /* WINDOW_ENABLE_EXTEND */
@@ -338,7 +338,7 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 		return 0;
 	}
 
-	if (bIsSessionStandalone || NULL) {
+	if (WindowData.bIsSessionStandalone) {
 		MSG msg = { };
 		while (GetMessageW(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);
@@ -350,7 +350,7 @@ HWND Lithium_Window::DWM::TilingMode(Window_t WindowData, BOOL bIsSessionStandal
 	return hWnd;
 }
 
-HWND Lithium_Window::DWM::TilingModeFlat(Window_t WindowData, BOOL bIsSessionStandalone)
+HWND Lithium_Window::DWM::TilingModeFlat(Window_t WindowData)
 {
 	LPCWSTR CLASS_NAME = L"TilingModeFlat_Window";
 	WNDCLASSW wcw = { };
@@ -372,7 +372,7 @@ HWND Lithium_Window::DWM::TilingModeFlat(Window_t WindowData, BOOL bIsSessionSta
 	hWnd = CreateWindowExW(
 		WindowData.dwExStyle, CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		WindowData.uPOSX, WindowData.uPOSY,
 		800, 500,
 		NULL, NULL, 
 		NULL, NULL
@@ -382,9 +382,9 @@ HWND Lithium_Window::DWM::TilingModeFlat(Window_t WindowData, BOOL bIsSessionSta
 	hWnd = CreateWindowW(
 		CLASS_NAME,
 		WindowData.lpWindowName, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		WindowData.uPOSX, WindowData.uPOSY,
 		800, 500,
-		NULL, NULL, 
+		NULL, NULL,
 		NULL, NULL
 	);
 	#endif /* WINDOW_ENABLE_EXTEND */
@@ -394,7 +394,7 @@ HWND Lithium_Window::DWM::TilingModeFlat(Window_t WindowData, BOOL bIsSessionSta
 		return 0;
 	}
 
-	if (bIsSessionStandalone) {
+	if (WindowData.bIsSessionStandalone) {
 		MSG msg = { };
 		while (GetMessageW(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);

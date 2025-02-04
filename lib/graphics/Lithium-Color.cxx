@@ -9,6 +9,8 @@
 #include <Windows.h>
 #include <wingdi.h>
 
+#pragma comment(lib, "gdi32.lib")
+
 HBRUSH Lithium_Graphics::Color::CreateBrushFromHex(COLORREF hexColor) 
 {
     BYTE r = (hexColor >> 16) & 0xFF;

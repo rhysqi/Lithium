@@ -10,19 +10,19 @@
 #include <winuser.h>
 #include <windef.h>
 
-using namespace Lithium_System;
+#pragma comment(lib, "user32.lib")
 
-UINT Util::DisplayHeight()
+UINT Lithium_System::Util::DisplayHeight()
 {
 	return GetSystemMetrics(SM_CXSCREEN);
 }
 
-UINT Util::DisplayWidth()
+UINT Lithium_System::Util::DisplayWidth()
 {
 	return GetSystemMetrics(SM_CYSCREEN);
 }
 
-UINT Util::WindowHeight(HWND hWnd)
+UINT Lithium_System::Util::WindowHeight(HWND hWnd)
 {
 	RECT rect;
 	if (GetWindowRect(hWnd, &rect)) {
@@ -31,7 +31,7 @@ UINT Util::WindowHeight(HWND hWnd)
 	return 0;
 }
 
-UINT Util::WindowWidth(HWND hWnd)
+UINT Lithium_System::Util::WindowWidth(HWND hWnd)
 {
 	RECT rect;
 	if (GetWindowRect(hWnd, &rect)) {
@@ -40,7 +40,14 @@ UINT Util::WindowWidth(HWND hWnd)
 	return 0;
 }
 
-VOID Util::MicroSleep(UINT64 uMicroSeconds)
+UINT Lithium_System::Util::WindowClientHeight(HWND hWnd)
+{
+
+    return 0;
+}
+
+// Sleep with microseconds scale
+VOID Lithium_System::Util::MicroSleep(UINT64 uMicroSeconds)
 {
     LARGE_INTEGER frequency;
     QueryPerformanceFrequency(&frequency);
@@ -56,7 +63,8 @@ VOID Util::MicroSleep(UINT64 uMicroSeconds)
     } while ((current.QuadPart - start.QuadPart) < targetTicks);
 }
 
-VOID Util::NanoSleep(UINT64 uNanoSeconds)
+// Sleep with nanoseconds scale
+VOID Lithium_System::Util::NanoSleep(UINT64 uNanoSeconds)
 {
     LARGE_INTEGER frequency;
     QueryPerformanceFrequency(&frequency);

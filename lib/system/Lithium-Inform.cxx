@@ -10,6 +10,8 @@
 #include <errhandlingapi.h>
 #include <minwinbase.h>
 
+#pragma comment(lib, "user32.lib")
+
 // Lithium system error message with messagebox but not terminated process
 INT Lithium_System::Inform::ShowErrorWithoutTerminate()
 {
