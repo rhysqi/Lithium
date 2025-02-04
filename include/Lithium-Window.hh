@@ -111,15 +111,15 @@ namespace Lithium_Window {
 			COLORREF crfForeground;
 		} Widget_t, *pWidget_t;
 
-		HWND Button(Widget_t WidgetData);
-		HWND Label(Widget_t WidgetData);
-		HWND Menu(Widget_t WidgetData);
-		HWND MenuItem(Widget_t WidgetData);
-		HWND MessageBox(Widget_t WidgetData);
-		HWND Overlay(Widget_t WidgetData);
-		HWND RadioButton(Widget_t WidgetData);
-		HWND TextBox(Widget_t WidgetData);
-		HWND TreeView(Widget_t WidgetData);
+		HWND Button(Widget_t ltButtonData);
+		HWND Label(Widget_t ltLabelData);
+		HWND Menu(Widget_t ltMenuData);
+		HWND MenuItem(Widget_t ltMenuItemData);
+		HWND MessageBox(Widget_t ltMessageBoxData);
+		HWND Overlay(Widget_t ltOverlayData);
+		HWND RadioButton(Widget_t ltRadioButtonData);
+		HWND TextBox(Widget_t ltTextBoxData);
+		HWND TreeView(Widget_t ltTreeViewData);
 	}
 }
 
