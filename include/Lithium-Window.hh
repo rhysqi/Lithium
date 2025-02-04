@@ -10,7 +10,7 @@
 #include <heapapi.h>
 #include <uxtheme.h>
 
-#define LT_DWM_USEDEFAULT 0
+#define LT_DWM_USEDEFAULT TRUE
 
 namespace Lithium_Window {
 	// Window Style definition
@@ -18,22 +18,31 @@ namespace Lithium_Window {
 		typedef struct 
 		{
 			LPCWSTR lpWindowName;
-			HWND hwParent;
+			HWND hParent = NULL;
 			WNDPROC wpEvent;
 
 			UINT16 uHeight;
+			UINT16 uHeightMin;
+			UINT16 uHeightMax;
 			UINT16 uWidth;
-			UINT16 uPOSX;
-			UINT16 uPOSY;
+			UINT16 uWidthMin;
+			UINT16 uWidthMax;
+			
+			UINT16 uPOSX = CW_USEDEFAULT;
+			UINT16 uPOSY = CW_USEDEFAULT;
 
+			BOOL bIsSessionStandalone = LT_DWM_USEDEFAULT;
+
+			DWORD dwExStyle = 0;
 			LPVOID lpScreenBuffer;
 			COLORREF crfBackground;
 		} Window_t, *pWindow_t;
 
-		HWND Base(Window_t WindowData, BOOL bIsSessionStandalone);
-		HWND SystemDefault(Window_t WindowData, BOOL bIsSessionStandalone);
-		HWND SystemFlat(Window_t WindowData, BOOL bIsSessionStandalone);
-		HWND TilingMode(Window_t WindowData, BOOL bIsSessionStandalone);
+		HWND Base(Window_t WindowData);
+		HWND SystemDefault(Window_t WindowData);
+		HWND SystemFlat(Window_t WindowData);
+		HWND TilingMode(Window_t WindowData);
+		HWND TilingModeFlat(Window_t WindowData);
 
 		HWND Experimental(HINSTANCE hInstance);
 		VOID EnableRoundedCorners(HWND hWnd);
@@ -44,7 +53,7 @@ namespace Lithium_Window {
 		typedef struct
 		{
 			LPVOID lpClientbuffer;
-			LPVOID lpNClientBuffer;
+			LPVOID lpNonClientBuffer;
 		} WindowHandler_t, *pWindowHandler_t;
 
 		typedef struct
@@ -52,6 +61,8 @@ namespace Lithium_Window {
 			LPVOID lpKeyDown;
 			LPVOID lpKeyUp;
 			LPVOID lpKeyPress;
+			LPVOID lpMouseHover;
+			LPVOID lpKeyboardInput;
 		} WdigetHandler_t, *pWdigetHandler_t;
 	}
 
@@ -74,12 +85,41 @@ namespace Lithium_Window {
 		LPVOID WrapPanel(Layout_t ltWrapPanel);
 	}
 
-	// Wdigets definitions
+	// Widgets definitions
 	namespace Widget {
-		HWND Button(LPCWSTR lpButtonName, DWORD dwButtonStyle, WNDPROC wpEvent);
-		HWND Menu();
-		HWND TextBox();
-		HWND TreeView();
+		typedef struct 
+		{
+			LPCWSTR lpWidgetName;
+			HWND hParent = NULL;
+			WNDPROC wpEvent;
+
+			UINT16 uHeight;
+			UINT16 uHeightMin;
+			UINT16 uHeightMax;
+			UINT16 uWidth;
+			UINT16 uWidthMin;
+			UINT16 uWidthMax;
+			
+			UINT16 uPOSX = CW_USEDEFAULT;
+			UINT16 uPOSY = CW_USEDEFAULT;
+
+			BOOL bIsSessionStandalone = LT_DWM_USEDEFAULT;
+
+			DWORD dwExStyle = 0;
+			LPVOID lpWidgetBuffer;
+			COLORREF crfBackground;
+			COLORREF crfForeground;
+		} Widget_t, *pWidget_t;
+
+		HWND Button(Widget_t WidgetData);
+		HWND Label(Widget_t WidgetData);
+		HWND Menu(Widget_t WidgetData);
+		HWND MenuItem(Widget_t WidgetData);
+		HWND MessageBox(Widget_t WidgetData);
+		HWND Overlay(Widget_t WidgetData);
+		HWND RadioButton(Widget_t WidgetData);
+		HWND TextBox(Widget_t WidgetData);
+		HWND TreeView(Widget_t WidgetData);
 	}
 }
 
