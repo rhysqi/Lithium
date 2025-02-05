@@ -6,6 +6,8 @@ This approach gives developers granular control over text rendering, memory mana
 - [ ] Syntax Highlighting
 - [ ] Fonts Customization
 - [x] Tiling Mode Window
+- [ ] Transparent Background
+- [ ] Image Background
 
 # System Requirements
 - Windows 64 Bit
