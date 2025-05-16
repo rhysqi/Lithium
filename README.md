@@ -17,3 +17,6 @@ This approach gives developers granular control over text rendering, memory mana
 - Clang/LLVM (17.0.5)
 - C/C++ without UCRT & STD C++
 - Makefile
+
+# Notes
+- This project still under developments. Contribution and feedback are welcome!
