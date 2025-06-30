@@ -14,7 +14,7 @@ This approach gives developers granular control over text rendering, memory mana
 
 # Libraries, Toolchains & Programming Language
 - Windows API (10.0.26100.0)
-- Clang/LLVM (17.0.5)
+- Clang/LLVM (20.1.0)
 - C/C++ without UCRT & STD C++
 - Makefile
 
