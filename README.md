@@ -1,5 +1,5 @@
-# Lithium - Text Editor for Windows
-Lithium is a low-level text editor framework built using Windows API, designed for fast and efficient text manipulation. Unlike traditional text editors or IDE frameworks, it operates by directly invoking system-level functions, bypassing higher-level libraries or runtimes.
+# Lithium - System Native Text Editor
+Lithium is a low-level text editor framework built using System API, designed for fast and efficient text manipulation. Unlike traditional text editors or IDE frameworks, it operates by directly invoking system-level functions, bypassing higher-level libraries or runtimes.
 This approach gives developers granular control over text rendering, memory management, and file system interactions, resulting in a highly responsive and optimized experience. With a focus on performance and customization, Lithium aims to provide a "bare-metal" text editing environment, similar to how specialized tools like VSCode are built, but with direct system interaction for enhanced flexibility and speed.
 
 # Features
@@ -11,11 +11,14 @@ This approach gives developers granular control over text rendering, memory mana
 
 # System Requirements
 - Windows 64 Bit
+- Linux
+- FreeBSD
 
 # Libraries, Toolchains & Programming Language
+- Xorg/X11 API
 - Windows API (10.0.26100.0)
-- Clang/LLVM (20.1.0)
-- C/C++ without UCRT & STD C++
+- Clang/LLVM (17.x.x)
+- C/C++ without STD C++
 - Makefile
 
 # Notes
