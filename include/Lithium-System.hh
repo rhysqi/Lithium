@@ -1,6 +1,7 @@
 #ifndef LITHIUM_SYSTEM_HH
 #define LITHIUM_SYSTEM_HH
 
+#pragma region Windows System API Segments
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>
@@ -96,6 +97,27 @@ namespace Lithium_System {
 		}
 	}
 
+	// Types definition
+	namespace Types {
+		typedef LPINT *LPPINT;
+		typedef LPBOOL *LPPBOOL;
+		typedef LPCSTR *LPPCSTR;
+		typedef LPCWSTR *LPPCWSTR;
+		typedef LPVOID *LPPVOID;
+		typedef LPWORD *LPPWORD;
+		typedef LPBYTE *LPPBYTE;
+		
+		typedef PINT *PPINT;
+		typedef PFLOAT *PPFLOAT;
+		typedef PBOOL *PPBOOL;
+		typedef PCHAR *PPCHAR;
+		typedef PSTR *PPSTR;
+		typedef PWCHAR *PPWCHAR;
+		typedef PVOID *PPVOID;
+		typedef PWORD *PPWORD;
+		typedef PBYTE *PPBYTE;
+	}
+
     // Utility definition
     namespace Util {
 		LPVOID CheckFileBasedOnMagicNumber(LPCWSTR lpFilepath);
@@ -113,4 +135,83 @@ namespace Lithium_System {
 }
 
 #endif /* defined(_WIN32) | defined(_WIN64) */
+#pragma endregion Windows System API Segments
+
+#pragma region Linux System API Segments
+#ifdef __linux__
+
+#include <X11/Xlib.h>
+
+namespace Lithium_System {
+
+	// Directory definition
+	namespace Directory {
+		
+	}
+
+	// File definition
+	namespace File {
+		int CreateFile(const char* filename);
+		int ReadFile(const char* filename);
+		int WriteFile(const char* filename, const char* fileBuffer);
+	}
+
+	// Inform definition
+	namespace Inform {
+		int ShowLastError();
+		int ShowMessage(const char* message);
+	}
+
+	// Pool definition
+	namespace Pool {
+
+		// Memory definition
+		namespace Memory {
+
+			// Heap definition
+			namespace Heap {
+
+			}
+
+			// Virtual definition
+			namespace Virtual {
+
+			}
+		}
+
+		namespace Thread {
+
+		}
+	}
+
+	// Types definition
+	namespace Types {
+		typedef int *pint;
+		typedef void *pvoid;
+		typedef char *pchar;
+		typedef bool *pbool;
+		typedef float *pfloat;
+		typedef double *pdouble;
+	}
+	
+	namespace Utils {
+		unsigned int ScreenHeight();
+		unsigned int ScreenWidth();
+
+		unsigned int WindowHeight(Window window);
+		unsigned int WindowWidth(Window window);
+	}
+}
+
+#endif /* __linux__ */
+#pragma endregion Linux System API Segments
+
+#pragma region FreeBSD System API Segments
+#ifdef __FreeBSD__
+
+#include <X11/Xlib.h>
+
+#endif /* __FreeBSD__ */
+#pragma endregion FreeBSD System API Segments
+
 #endif /* LITHIUM_SYSTEM_HH */
