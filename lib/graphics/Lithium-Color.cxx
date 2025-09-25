@@ -1,10 +1,10 @@
+#include "../../include/Lithium-Graphics.hh"
+
 #if defined(_WIN32) || defined(_WIN64)
 
 #ifndef UNICODE
 #define UNICODE
 #endif /* UNICODE */
-
-#include "../../include/Lithium-Graphics.hh"
 
 #include <Windows.h>
 #include <wingdi.h>
@@ -33,3 +33,18 @@ COLORREF Lithium_Graphics::Color::Hex_RGB(COLORREF hexColor)
 }
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
+
+#ifdef __linux__
+
+#include <X11/Xlib.h>
+
+
+
+#endif /* __linux__ */
+
+#ifdef __FreeBSD__
+
+#include <X11/Xlib.h>
+
+
+#endif /* __FreeBSD__ */

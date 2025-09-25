@@ -1,10 +1,13 @@
+#include "../../include/Lithium-System.hh"
+
+#pragma region Windows System API Segments
+
 #if defined(_WIN32) || defined(_WIN64)
 
 #ifndef UNICODE
 #define UNICODE
 #endif /* UNICODE */
 
-#include "../../include/Lithium-System.hh"
 
 #include <Windows.h>
 #include <winuser.h>
@@ -81,3 +84,24 @@ VOID Lithium_System::Util::NanoSleep(UINT64 uNanoSeconds)
 }
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
+
+#pragma endregion Windows System API Segments
+
+#pragma region Linux System API Segments
+
+#ifdef __linux__
+
+#include <sys/errno.h>
+
+unsigned int Lithium_System::Utils::ScreenHeight()
+{
+    
+}
+
+unsigned int Lithium_System::Utils::ScreenWidth()
+{
+
+}
+
+#endif /* __linux__ */
+#pragma endregion Linux System API Segments

@@ -1,6 +1,5 @@
-#if defined(_WIN32) || defined(_WIN64)
-
 #include "../../include/Lithium-System.hh"
+#if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>
 #include <winuser.h>
@@ -69,3 +68,16 @@ INT Lithium_System::Inform::ShowMessage(LPCWSTR lpMessage)
 }
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
+
+#ifdef __linux__
+
+int Lithium_System::Inform::ShowMessage(const char *message)
+{
+	if (!message) {
+		message = "Message are null or not initialized";
+	}
+
+	return 0;
+}
+
+#endif /* __linux__ */
