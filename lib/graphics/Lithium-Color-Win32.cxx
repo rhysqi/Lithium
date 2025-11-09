@@ -11,7 +11,7 @@
 
 #pragma comment(lib, "gdi32.lib")
 
-HBRUSH Lithium_Graphics::Color::CreateBrushFromHex(COLORREF hexColor) 
+HBRUSH Lithium_Graphics::Color::CreateBrushFromHex(COLORREF hexColor)
 {
     BYTE r = (hexColor >> 16) & 0xFF;
     BYTE g = (hexColor >> 8) & 0xFF;
@@ -26,10 +26,10 @@ HBRUSH Lithium_Graphics::Color::CreateBrushFromRGB(UINT8 Red, UINT8 Green, UINT8
 
 COLORREF Lithium_Graphics::Color::Hex_RGB(COLORREF hexColor)
 {
-	BYTE R = (hexColor >> 16) & 0xff;
-	BYTE G = (hexColor >> 8) & 0xff;
-	BYTE B = (hexColor) & 0xff;
-	return RGB(R, G, B);
+    BYTE R = (hexColor >> 16) & 0xff;
+    BYTE G = (hexColor >> 8) & 0xff;
+    BYTE B = (hexColor) & 0xff;
+    return RGB(R, G, B);
 }
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
@@ -38,13 +38,10 @@ COLORREF Lithium_Graphics::Color::Hex_RGB(COLORREF hexColor)
 
 #include <X11/Xlib.h>
 
-
-
 #endif /* __linux__ */
 
 #ifdef __FreeBSD__
 
 #include <X11/Xlib.h>
-
 
 #endif /* __FreeBSD__ */
