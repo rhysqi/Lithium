@@ -1,72 +1,75 @@
-#ifndef LITHIUM_SYSTEM_FREEBSD_HH
-#define LITHIUM_SYSTEM_FREEBSD_HH
 
-#include <X11/Xlib.h>
+// #include <X11/Xlib.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
 
 namespace Lithium_System {
 
     // Directory definition
     namespace Directory {
-
+		int Create(const char *dirname);
+		int Remove(const char *src, char* dst);
+		int Rename(const char *src, char* dst);
     }
 
     // File definition
     namespace File {
-	int CreateFile(const char *filename);
-	int ReadFile(const char *filename);
-	int WriteFile(const char *filename, const char *fileBuffer);
+		int CreateFile(const char *filename);
+		int ReadFile(const char *filename);
+		int WriteFile(const char *filename, const char *fileBuffer);
     } // namespace File
 
     // Inform definition
     namespace Inform {
-	int ShowLastError();
-	int ShowMessage(const char *message);
+		int ShowLastError();
+		int ShowMessage(const char *message, int mode);
     } // namespace Inform
 
     // Pool definition
     namespace Pool {
+		// Memory definition
+		namespace Memory {
+			// Heap definition
+			namespace Heap {
+				void *Create();
+				void *Free(void* pMemoryPool);
+				void *FreeEx(void* pMemoryPool, uint uIndex);
+				void *Destroy(void* pMemoryPool);
+				void *DestroyEx(void* pMemoryPool, uint uIndex);
+			}
 
-	// Memory definition
-	namespace Memory {
+			// Virtual definition
+			namespace Virtual {
+				void *Create();
+				void Free();
+			}
+		} // namespace Memory
 
-	    // Heap definition
-	    namespace Heap {
-		void *Create();
-	    }
+		namespace Thread {
 
-	    // Virtual definition
-	    namespace Virtual {
-		void *Create();
-	    }
-	} // namespace Memory
-
-	namespace Thread {
-
-	}
-    } // namespace Pool
+		}
+	} // namespace Pool
 
     // Types definition
     namespace Types {
-	typedef int    *pint;
-	typedef void   *pvoid;
-	typedef char   *pchar;
-	typedef bool   *pbool;
-	typedef float  *pfloat;
-	typedef double *pdouble;
+		typedef int    *pint;
+		typedef void   *pvoid;
+		typedef char   *pchar;
+		typedef bool   *pbool;
+		typedef float  *pfloat;
+		typedef double *pdouble;
     } // namespace Types
 
-    namespace Utils {
-	bool SSE42_Support();
-	bool AVX2_Support();
-	bool GPU_Enums();
-	bool Debugger();
+    namespace Util {
+		bool SSE42_Support();
+		bool AVX2_Support();
+		bool GPU_Enums();
+		bool Debugger();
 
-	unsigned int ScreenHeight();
-	unsigned int ScreenWidth();
+		unsigned int ScreenHeight();
+		unsigned int ScreenWidth();
 
-	unsigned int WindowHeight(Window window);
-	unsigned int WindowWidth(Window window);
+		// unsigned int WindowHeight(Window window);
+		// unsigned int WindowWidth(Window window);
     } // namespace Utils
 } // namespace Lithium_System
-
-#endif /* LITHIUM_SYSTEM_FREEBSD_HH */

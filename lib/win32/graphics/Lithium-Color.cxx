@@ -1,4 +1,3 @@
-#include "../../include/Lithium-Graphics.hh"
 
 #if defined(_WIN32) || defined(_WIN64)
 
@@ -39,9 +38,3 @@ COLORREF Lithium_Graphics::Color::Hex_RGB(COLORREF hexColor)
 #include <X11/Xlib.h>
 
 #endif /* __linux__ */
-
-#ifdef __FreeBSD__
-
-#include <X11/Xlib.h>
-
-#endif /* __FreeBSD__ */
