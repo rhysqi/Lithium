@@ -1,5 +1,5 @@
 
-// #include <X11/Xlib.h>
+#include <X11/Xlib.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 
@@ -41,7 +41,8 @@ namespace Lithium_System {
 			// Virtual definition
 			namespace Virtual {
 				void *Create();
-				void Free();
+				void Free(void* pMemoryPool);
+				void FreeEx(void* pMemoryPool, uint uIndex);
 			}
 		} // namespace Memory
 
@@ -69,7 +70,7 @@ namespace Lithium_System {
 		unsigned int ScreenHeight();
 		unsigned int ScreenWidth();
 
-		// unsigned int WindowHeight(Window window);
-		// unsigned int WindowWidth(Window window);
+		unsigned int WindowHeight(Window window);
+		unsigned int WindowWidth(Window window);
     } // namespace Utils
 } // namespace Lithium_System
