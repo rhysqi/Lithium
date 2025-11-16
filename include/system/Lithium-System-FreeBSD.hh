@@ -1,7 +1,7 @@
-
 #include <X11/Xlib.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
+#include <CL/cl.h>
 
 namespace Lithium_System {
 
@@ -21,7 +21,6 @@ namespace Lithium_System {
 
     // Inform definition
     namespace Inform {
-		int ShowLastError();
 		int ShowMessage(const char *message, int mode);
     } // namespace Inform
 

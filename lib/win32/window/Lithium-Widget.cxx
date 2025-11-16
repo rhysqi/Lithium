@@ -1,6 +1,6 @@
 #if defined(_WIN32) || defined(_WIN64)
 
-#include "../../include/Lithium-Window.hh"
+#include "../../../include/window/Lithium-Window-Win32.hh"
 
 #include <Windows.h>
 #include <winuser.h>

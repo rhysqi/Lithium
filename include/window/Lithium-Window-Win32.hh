@@ -1,7 +1,7 @@
-#ifndef LITHIUM_WINDOW_HH
-#define LITHIUM_WINDOW_HH
+#ifndef LITHIUM_WINDOW_WIN32_HH
+#define LITHIUM_WINDOW_WIN32_HH
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined (_WIN32) || defined (_WIN64)
 
 #include <Windows.h>
 #include <winnt.h>
@@ -123,5 +123,6 @@ namespace Lithium_Window {
     } // namespace Widget
 } // namespace Lithium_Window
 
-#endif /* defined(_WIN32) || defined(_WIN64) */
-#endif /* LITHIUM_WINDOW_HH */
+#endif /* defined (_WIN32) || defined (_WIN64) */
+
+#endif /* LITHIUM_WINDOW_WIN32_HH */
