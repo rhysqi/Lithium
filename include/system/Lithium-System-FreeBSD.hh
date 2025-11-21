@@ -1,7 +1,9 @@
-#include <X11/Xlib.h>
-#include <sys/ioctl.h>
+#ifndef LITHIUM_SYSTEM_FREEBSD_HH
+#define LITHIUM_SYSTEM_FREEBSD_HH
+
 #include <sys/types.h>
-#include <CL/cl.h>
+
+#include <X11/Xlib.h>
 
 namespace Lithium_System {
 
@@ -17,12 +19,17 @@ namespace Lithium_System {
 		int CreateFile(const char *filename);
 		int ReadFile(const char *filename);
 		int WriteFile(const char *filename, const char *fileBuffer);
-    } // namespace File
+    }
 
     // Inform definition
     namespace Inform {
 		int ShowMessage(const char *message, int mode);
-    } // namespace Inform
+    }
+
+	// Memory definition
+	namespace Memory {
+		
+	}
 
     // Pool definition
     namespace Pool {
@@ -30,25 +37,34 @@ namespace Lithium_System {
 		namespace Memory {
 			// Heap definition
 			namespace Heap {
-				void *Create();
-				void *Free(void* pMemoryPool);
-				void *FreeEx(void* pMemoryPool, uint uIndex);
-				void *Destroy(void* pMemoryPool);
-				void *DestroyEx(void* pMemoryPool, uint uIndex);
+				void *Create(void *pMemoryPool, uint uPoolCount);
+				int Destroy(void *pMemoryPool);
+				int DestroyEx(void *pMemoryPool, uint uIndex);
+				int Free(void *pMemoryPool);
+				int FreeEx(void *pMemoryPool, uint uIndex);
+				int Protect(void *pMemoryPool);
+				int ProtectEx(void *pMemoryPool, uint uIndex);
 			}
 
 			// Virtual definition
 			namespace Virtual {
-				void *Create();
-				void Free(void* pMemoryPool);
-				void FreeEx(void* pMemoryPool, uint uIndex);
+				void *Create(void *pMemoryPool, uint uPoolCount);
+				int Destroy(void *pMemoryPool);
+				int DestroyEx(void *pMemoryPool, uint uIndex);
+				int Free(void *pMemoryPool);
+				int FreeEx(void *pMemoryPool, uint uIndex);
+				int Protect(void *pMemoryPool);
+				int ProtectEx(void *pMemoryPool, uint uIndex);
 			}
-		} // namespace Memory
-
-		namespace Thread {
-
 		}
-	} // namespace Pool
+
+		// Thread Definition
+		namespace Thread {
+			void Create();
+			void Terminate(void *pThread);
+			void TerminateEx(void *pThread, uint uIndex);
+		}
+	}
 
     // Types definition
     namespace Types {
@@ -58,7 +74,7 @@ namespace Lithium_System {
 		typedef bool   *pbool;
 		typedef float  *pfloat;
 		typedef double *pdouble;
-    } // namespace Types
+    }
 
     namespace Util {
 		bool SSE42_Support();
@@ -71,5 +87,8 @@ namespace Lithium_System {
 
 		unsigned int WindowHeight(Window window);
 		unsigned int WindowWidth(Window window);
-    } // namespace Utils
-} // namespace Lithium_System
+    }
+}
+
+
+#endif /* LITHIUM_SYSTEM_FREEBSD_HH */
