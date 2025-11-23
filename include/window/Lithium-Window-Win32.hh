@@ -15,111 +15,111 @@
 namespace Lithium_Window {
     // Window Style definition
     namespace DWM {
-	typedef struct
-	{
-	    LPCWSTR lpWindowName;
-	    HWND    hParent = NULL;
-	    WNDPROC wpEvent;
+		typedef struct
+		{
+			LPCWSTR lpWindowName;
+			HWND    hParent = NULL;
+			WNDPROC wpEvent;
 
-	    UINT16 uHeight;
-	    UINT16 uHeightMin;
-	    UINT16 uHeightMax;
-	    UINT16 uWidth;
-	    UINT16 uWidthMin;
-	    UINT16 uWidthMax;
+			UINT16 uHeight;
+			UINT16 uHeightMin;
+			UINT16 uHeightMax;
+			UINT16 uWidth;
+			UINT16 uWidthMin;
+			UINT16 uWidthMax;
 
-	    UINT16 uPOSX = CW_USEDEFAULT;
-	    UINT16 uPOSY = CW_USEDEFAULT;
+			UINT16 uPOSX = CW_USEDEFAULT;
+			UINT16 uPOSY = CW_USEDEFAULT;
 
-	    BOOL bIsSessionStandalone = LT_DWM_USEDEFAULT;
+			BOOL bIsSessionStandalone = LT_DWM_USEDEFAULT;
 
-	    DWORD    dwExStyle = 0;
-	    LPVOID   lpScreenBuffer;
-	    COLORREF crfBackground;
-	} Window_t, *pWindow_t;
+			DWORD    dwExStyle = 0;
+			LPVOID   lpScreenBuffer;
+			COLORREF crfBackground;
+		} Window_t, *pWindow_t;
 
-	HWND Base(Window_t WindowData);
-	HWND SystemDefault(Window_t WindowData);
-	HWND SystemFlat(Window_t WindowData);
-	HWND TilingMode(Window_t WindowData);
-	HWND TilingModeFlat(Window_t WindowData);
+		HWND Base(Window_t WindowData);
+		HWND SystemDefault(Window_t WindowData);
+		HWND SystemFlat(Window_t WindowData);
+		HWND TilingMode(Window_t WindowData);
+		HWND TilingModeFlat(Window_t WindowData);
 
-	HWND Experimental(HINSTANCE hInstance);
-	VOID EnableRoundedCorners(HWND hWnd);
+		HWND Experimental(HINSTANCE hInstance);
+		VOID EnableRoundedCorners(HWND hWnd);
     } // namespace DWM
 
     // Event definitions
     namespace Event {
-	typedef struct
-	{
-	    LPVOID lpClientbuffer;
-	    LPVOID lpNonClientBuffer;
-	} WindowHandler_t, *pWindowHandler_t;
+		typedef struct
+		{
+			LPVOID lpClientbuffer;
+			LPVOID lpNonClientBuffer;
+		} WindowHandler_t, *pWindowHandler_t;
 
-	typedef struct
-	{
-	    LPVOID lpKeyDown;
-	    LPVOID lpKeyUp;
-	    LPVOID lpKeyPress;
-	    LPVOID lpMouseHover;
-	    LPVOID lpKeyboardInput;
-	} WdigetHandler_t, *pWdigetHandler_t;
+		typedef struct
+		{
+			LPVOID lpKeyDown;
+			LPVOID lpKeyUp;
+			LPVOID lpKeyPress;
+			LPVOID lpMouseHover;
+			LPVOID lpKeyboardInput;
+		} WdigetHandler_t, *pWdigetHandler_t;
     } // namespace Event
 
     // Layout definitions
     namespace Layout {
-	typedef struct
-	{
-	    INT16 Height;
-	    INT16 Width;
-	    INT16 gap;
-	    INT16 thickness;
+		typedef struct
+		{
+			INT16 Height;
+			INT16 Width;
+			INT16 gap;
+			INT16 thickness;
 
-	    MARGINS margins;
-	    MARGINS paddings;
-	} Layout_t, *pLayout_t;
+			MARGINS margins;
+			MARGINS paddings;
+		} Layout_t, *pLayout_t;
 
-	LPVOID Grid(Layout_t ltGrid);
-	LPVOID GridSplitter(Layout_t ltGridSplitter);
-	LPVOID StackPanel(Layout_t ltStackPanel);
-	LPVOID WrapPanel(Layout_t ltWrapPanel);
+		LPVOID Grid(Layout_t ltGrid);
+		LPVOID GridSplitter(Layout_t ltGridSplitter);
+		LPVOID StackPanel(Layout_t ltStackPanel);
+		LPVOID WrapPanel(Layout_t ltWrapPanel);
     } // namespace Layout
 
     // Widgets definitions
     namespace Widget {
-	typedef struct
-	{
-	    LPCWSTR lpWidgetName;
-	    HWND    hParent = NULL;
-	    WNDPROC wpEvent;
+		typedef struct
+		{
+			LPCWSTR lpWidgetName;
+			HWND    hParent = NULL;
+			WNDPROC wpEvent;
 
-	    UINT16 uHeight;
-	    UINT16 uHeightMin;
-	    UINT16 uHeightMax;
-	    UINT16 uWidth;
-	    UINT16 uWidthMin;
-	    UINT16 uWidthMax;
+			UINT16 uHeight;
+			UINT16 uHeightMin;
+			UINT16 uHeightMax;
+			UINT16 uWidth;
+			UINT16 uWidthMin;
+			UINT16 uWidthMax;
 
-	    UINT16 uPOSX = CW_USEDEFAULT;
-	    UINT16 uPOSY = CW_USEDEFAULT;
+			UINT16 uPOSX = CW_USEDEFAULT;
+			UINT16 uPOSY = CW_USEDEFAULT;
 
-	    BOOL bIsSessionStandalone = LT_DWM_USEDEFAULT;
+			BOOL bIsSessionStandalone = LT_DWM_USEDEFAULT;
 
-	    DWORD    dwExStyle = 0;
-	    LPVOID   lpWidgetBuffer;
-	    COLORREF crfBackground;
-	    COLORREF crfForeground;
-	} Widget_t, *pWidget_t;
+			DWORD    dwExStyle = 0;
+			LPVOID   lpWidgetBuffer;
+			COLORREF crfBackground;
+			COLORREF crfForeground;
+		} Widget_t, *pWidget_t;
 
-	HWND Button(Widget_t ltButtonData);
-	HWND Label(Widget_t ltLabelData);
-	HWND Menu(Widget_t ltMenuData);
-	HWND MenuItem(Widget_t ltMenuItemData);
-	HWND MessageBox(Widget_t ltMessageBoxData);
-	HWND Overlay(Widget_t ltOverlayData);
-	HWND RadioButton(Widget_t ltRadioButtonData);
-	HWND TextBox(Widget_t ltTextBoxData);
-	HWND TreeView(Widget_t ltTreeViewData);
+		HWND Button(Widget_t ltButtonData);
+		HWND Label(Widget_t ltLabelData);
+		HWND Menu(Widget_t ltMenuData);
+		HWND MenuItem(Widget_t ltMenuItemData);
+		HWND MessageBox(Widget_t ltMessageBoxData);
+		HWND Overlay(Widget_t ltOverlayData);
+		HWND RadioButton(Widget_t ltRadioButtonData);
+		HWND TextBox(Widget_t ltTextBoxData);
+		HWND TreeView(Widget_t ltTreeViewData);
     } // namespace Widget
 } // namespace Lithium_Window
 
