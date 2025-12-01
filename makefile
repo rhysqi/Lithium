@@ -1,2 +1,4 @@
-include tools/config.mk
+var1 :=
 
+all: $s
+	echo "$s"
