@@ -16,9 +16,10 @@ This approach gives developers granular control over text rendering, memory mana
 
 # Libraries, Toolchains & Programming Language
 - Xorg/X11 API
+- FreeBSD System API/Call
 - Windows API (10.0.26100.0)
 - Clang/LLVM (17.x.x)
-- C/C++ without STD C++
+- C/C++ without CRT/STL
 - Makefile
 
 # Notes
