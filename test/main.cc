@@ -1,13 +1,49 @@
-#include <stdio.h>
-#include <X11/Xlib.h>
+#include <stdarg.h>
 
-uint ScreenWidth()
+int sum(int count, ...)
 {
-    return XDisplayWidth(XOpenDisplay(NULL), 0);
+    va_list ap;
+    va_start(ap, count);
+
+    int total = 0;
+    for(int i=0; i<count; i++)
+        total += va_arg(ap, int);
+
+    va_end(ap);
+    return total;
 }
 
-int main(int argc, const char *argv[]){
+int lth_main(int argc, const char *argv[]){
     
-    printf("Screen Width: %u", ScreenWidth());
+    sum(10, 100, 100);
     return 0;
+}
+
+void _start(void)
+{
+    long argc;
+    const char **argv;
+
+    // Ambil argc & argv dari stack (FreeBSD ABI)
+    asm volatile(
+        "mov %%rsp, %0"   // argc ada di [rsp]
+        : "=r"(argc)
+    );
+
+    argv = (const char **)((unsigned long *)__builtin_frame_address(0) + 1);
+
+    // panggil fungsi utama kamu
+    int ret = lth_main((int)argc, argv);
+
+    // lakukan syscall exit
+    asm volatile(
+        "movq $1, %%rax\n"    // SYS_exit = 1 (FreeBSD)
+        "movq %0, %%rdi\n"    // exit code (rdi)
+        "syscall\n"
+        :
+        : "r"(ret)
+        : "%rax", "%rdi"
+    );
+
+    while (1) {} // jaga agar tidak jatuh ke area tak valid
 }

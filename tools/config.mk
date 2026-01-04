@@ -14,7 +14,7 @@ OPT_Fno	=	-fno-autolink -fno-builtin -fno-cxx-modules \
 			-fno-strict-aliasing
 
 # Compiler options for machine flags
-OPT_M	=	-mavx2 -msse4.2 \
+OPT_M	=	-msse4.2 -mavx2 \
 			-mlvi-cfi -mseses \
 			-mstack-arg-probe -mstackrealign
 
