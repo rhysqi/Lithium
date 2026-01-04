@@ -19,7 +19,11 @@ This approach gives developers granular control over text rendering, memory mana
 - FreeBSD System API/Call
 - Windows API (10.0.26100.0)
 - Clang/LLVM (17.x.x)
+<<<<<<< HEAD
 - C/C++ with System API ( CRT-Glue and without STL )
+=======
+- C/C++ without CRT/STL
+>>>>>>> 5e9d5ba6815ca65e9b953ebe7327ff4a037789e2
 - Makefile
 
 # Notes

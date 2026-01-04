@@ -45,5 +45,11 @@ unsigned int Lithium_System::Util::ScreenWidth()
     return res;
 }
 
+bool Lithium_System::Util::SSE42_Support()
+{
+    
+    return 0;
+}
+
 #endif /* __FreeBSD__ */
 #pragma endregion FreeBSD System API Segments

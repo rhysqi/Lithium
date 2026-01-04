@@ -19,7 +19,7 @@ void *Lithium_System::Pool::Memory::Virtual::Create(uint uPoolCount, pVirtual_Po
 
 int Lithium_System::Pool::Memory::Virtual::Destroy(void *pMemoryPool)
 {
-    void *PoolFree = *pMemoryPool[1];
+    // void *PoolFree = *pMemoryPool[1];
     // munmap(pMemoryPool, sizeof(pMemoryPool));
 
     return 0;

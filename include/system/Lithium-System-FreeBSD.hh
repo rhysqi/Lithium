@@ -1,11 +1,6 @@
 #ifndef LITHIUM_SYSTEM_FREEBSD_HH
 #define LITHIUM_SYSTEM_FREEBSD_HH
 
-#include <fcntl.h>
-
-#include <stdatomic.h>
-#include <sys/types.h>
-
 #include <X11/Xlib.h>
 
 #define LTH_SHW_MSG_GUI_MODE 1
@@ -21,12 +16,19 @@ namespace Lithium_System {
 		int Watch(const char *dirname);
     }
 
+	// Event definition
+	namespace Event {
+		int Register(int ed, char *message);
+		int Trigger(int ed);
+		int Dispatch(int ed);
+	}
+
     // File definition
     namespace File {
-		int CreateFile(const char *filename, int permission);
-		int ReadFile(const char *filename);
-		int WriteFile(int fd, const char *fileBuffer);
-		int WatchFile(const char *filename);
+		int Create(const char *filename, int permission);
+		int Read(const char *filename);
+		int Write(int fd, const char *fileBuffer);
+		int Watch(const char *filename);
     }
 
     // Inform definition
@@ -44,7 +46,7 @@ namespace Lithium_System {
 
 		// Virtual definition
 		namespace Virtual {
-			void Create(void *pMemory, size_t len, int iProt, int iFlags, int iFd, off_t offset);
+			void *Create(void *pMemory, size_t len, int iProt, int iFlags, int iFd, off_t offset);
 		}
 	}
 
@@ -107,6 +109,7 @@ namespace Lithium_System {
 		typedef double *pdouble;
     }
 
+	// Util definition
     namespace Util {
 		bool SSE42_Support();
 		bool AVX2_Support();
