@@ -42,13 +42,18 @@ void Lth_Start(int argc, char **argv)
 }
 
 #include <sys/syscall.h>
+#include <unistd.h>
 #include <X11/Xlib.h>
 
 int Lth_Entry(int argc, const char *argv[])
 {
     const char *msg = "Hello\n";
-
+    
     XOpenDisplay(NULL);
 
     return 0;
 }
+
+int Convergent(int argc, const char *argv[], ...);
+
+int main(int argc, const char *argv[]) { return Convergent(argc, argv); }
