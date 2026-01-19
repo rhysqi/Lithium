@@ -6,6 +6,8 @@
 #include <sys/syscall.h>
 #include <sys/types.h>
 
+#include <unistd.h>
+
 typedef struct File_desc_t {
     size_t size;
     off_t offset_t;
@@ -31,6 +33,14 @@ int Lithium_System::Directory::Create(const char *dirname)
     return md;
 }
 
+int Lithium_System::Directory::Remove(const char *dirname)
+{
+    int md = rmdir(dirname);
+
+    
+    return md;
+}
+
 int Lithium_System::File::Create(const char *filename, int permission)
 {
     int fd = open("./", O_DIRECTORY);
@@ -39,5 +49,18 @@ int Lithium_System::File::Create(const char *filename, int permission)
 
     if (!openat(fd, filename, O_CREAT, permission)) return 1;
 
+    close(fd);
+
     return 0;
+}
+
+unsigned long long Lithium_System::File::Size(const char *filepath)
+{
+    struct stat st;
+    unsigned long long filesize;
+
+    if (stat(filepath, &st) == 0)
+        return filesize = st.st_size;
+
+    return -1;
 }

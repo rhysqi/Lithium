@@ -29,6 +29,8 @@ namespace Lithium_System {
 		int Read(const char *filename);
 		int Write(int fd, const char *fileBuffer);
 		int Watch(const char *filename);
+
+		unsigned long long Size(const char *filepath);
     }
 
     // Inform definition
