@@ -1,4 +1,9 @@
-var1 :=
+include tools/config.mk
+include tools/core.mk
+include tools/lib.mk
+include tools/setup.mk
 
-all: $s
-	echo "$s"
+build:
+	@echo $(FreeBSD_Core)
+	@echo $(FreeBSD_LIB)
+	

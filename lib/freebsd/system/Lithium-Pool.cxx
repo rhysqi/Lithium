@@ -6,11 +6,20 @@
 
 #include <X11/Xlib.h>
 
-using namespace Lithium_System::Types;
+using namespace Lithium_Types;
 
-void *Lithium_System::Pool::Memory::Virtual::Create(uint uPoolCount, pVirtual_Pool_t Virtual_Pool_t)
+typedef struct {
+    void *addr;
+    size_t len;
+    int iProt;
+    int iFlags;
+    int fd;
+    off_t offset;
+} Virtual_Pool_t, *pVirtual_Pool_t;
+
+lpVoid_t Lithium_System::Pool::Memory::Virtual::Create(uint uPoolCount, lpVoid_t Pooling_t)
 {
-    pvoid pMemoryPool;
+    pVoid_t pMemoryPool;
     pMemoryPool = { };
 
     

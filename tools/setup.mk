@@ -3,6 +3,7 @@
 SETUP_TARGET	?=
 
 BUILD_DIR		=	build
+BIN_DIR			=	$(BUILD_DIR)/bin/
 OBJECT_DIR		=	$(BUILD_DIR)/object/
 LIB_DIR			=	$(BUILD_DIR)/lib/
 
@@ -25,6 +26,13 @@ setup-freebsd:
 		mkdir -p $(BUILD_DIR); \
 	else \
 		echo "Build dir exists"; \
+	fi
+
+	@if [ ! -d $(BIN_DIR) ]; then \
+		echo "Creating object dir ..."; \
+		mkdir -p $(BIN_DIR); \
+	else \
+		echo "Bin dir exists"; \
 	fi
 
 	@if [ ! -d $(OBJECT_DIR) ]; then \

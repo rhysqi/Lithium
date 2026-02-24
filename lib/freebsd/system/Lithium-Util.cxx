@@ -9,46 +9,28 @@ bool Lithium_System::Util::Debugger()
     return ptrace(0, 0,0, 0);
 }
 
-unsigned int Lithium_System::Util::WindowHeight(Window window)
-{
-    if (!window) return 1;
-
-    return WindowHeight(window);
-}
-
-unsigned int Lithium_System::Util::WindowWidth(Window window)
-{
-    if (!window) return 1;
-
-    return WindowWidth(window);
-}
-
-unsigned int Lithium_System::Util::ScreenHeight()
-{
-    Display *dsp = XOpenDisplay(NULL);
-    if (!dsp) return 1;
-
-    unsigned int res = DisplayHeight(dsp, 0);
-    XCloseDisplay(dsp);
-
-    return res;
-}
-
-unsigned int Lithium_System::Util::ScreenWidth()
-{
-    Display *dsp = XOpenDisplay(NULL);
-    if (!dsp) return 1;
-
-    unsigned int res = XDisplayWidth(dsp, 0);
-    XCloseDisplay(dsp);
-
-    return res;
-}
-
 bool Lithium_System::Util::SSE42_Support()
 {
+    #if defined (__x86_64__) || defined (__i386__)
+
+    return __builtin_cpu_supports("sse4.2");
+
+    #else
+        return false;
     
-    return 0;
+    #endif /* defined (__x86_64__) || defined (__i386__) */
+}
+
+bool Lithium_System::Util::AVX2_Support()
+{
+    #if defined (__x86_64__) || defined (__i386__)
+
+    return __builtin_cpu_supports("avx2");
+
+    #else
+        return false;
+    
+    #endif /* defined (__x86_64__) || defined (__i386__) */
 }
 
 #endif /* __FreeBSD__ */

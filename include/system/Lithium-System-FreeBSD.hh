@@ -1,12 +1,16 @@
 #ifndef LITHIUM_SYSTEM_FREEBSD_HH
 #define LITHIUM_SYSTEM_FREEBSD_HH
 
-#include <X11/Xlib.h>
+#include "../types/Lithium-Types.hh"
+
+#include <sys/types.h>
 
 #define LTH_SHW_MSG_GUI_MODE 1
 #define LTH_SHW_MSG_CLI_MODE 0
 
+// System Definition
 namespace Lithium_System {
+	using namespace Lithium_Types;
 
     // Directory definition
     namespace Directory {
@@ -25,7 +29,12 @@ namespace Lithium_System {
 
     // File definition
     namespace File {
-		int Create(const char *filename, int permission);
+		typedef struct {
+			int kd;
+			int fd;
+		} Desc;
+		
+		Desc Create(const char *filename, int permission);
 		int Read(const char *filename);
 		int Write(int fd, const char *fileBuffer);
 		int Watch(const char *filename);
@@ -58,7 +67,7 @@ namespace Lithium_System {
 		namespace Memory {
 			// Heap definition
 			namespace Heap {
-				void *Create(void *pMemoryPool, uint uPoolCount);
+				lpVoid_t Create(lpVoid_t pMemoryPool, uint uPoolCount);
 				int Free(void *pMemoryPool);
 				int FreeEx(void *pMemoryPool, uint uIndex);
 				int Destroy(void *pMemoryPool);
@@ -69,17 +78,7 @@ namespace Lithium_System {
 
 			// Virtual definition
 			namespace Virtual {
-
-				typedef struct {
-					void *addr;
-					size_t len;
-					int iProt;
-					int iFlags;
-					int fd;
-					off_t offset;
-				} Virtual_Pool_t, *pVirtual_Pool_t;
-
-				void *Create(uint uPoolCount, pVirtual_Pool_t Pooling_t);
+				lpVoid_t Create(uint uPoolCount, lpVoid_t Pooling_t);
 				int Free(void *pMemoryPool);
 				int FreeEx(void *pMemoryPool, uint uIndex);
 				int Destroy(void *pMemoryPool);
@@ -101,28 +100,15 @@ namespace Lithium_System {
 		}
 	}
 
-    // Types definition
-    namespace Types {
-		typedef int    *pint;
-		typedef void   *pvoid;
-		typedef char   *pchar;
-		typedef bool   *pbool;
-		typedef float  *pfloat;
-		typedef double *pdouble;
-    }
-
 	// Util definition
     namespace Util {
 		bool SSE42_Support();
 		bool AVX2_Support();
-		bool GPU_Enums();
+		
+		bool ASLR();
 		bool Debugger();
 
-		unsigned int ScreenHeight();
-		unsigned int ScreenWidth();
-
-		unsigned int WindowHeight(Window window);
-		unsigned int WindowWidth(Window window);
+		bool GPU_Enums();
     }
 }
 

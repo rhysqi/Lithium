@@ -1,36 +1,39 @@
 #include "../../../include/system/Lithium-System-FreeBSD.hh"
+#include "../../../include/types/Lithium-Types-FreeBSD.hh"
 
 #ifdef __FreeBSD__
 
 #include <sys/mman.h>
 
-using namespace Lithium_System::Types;
+using namespace Lithium_Types;
 
-typedef struct Virtual_Memory_t {
-    void *addr;
+typedef struct {
+    lpVoid_t addr;
     size_t len;
     int iProt;
     int iFlags;
     int fd;
     off_t offset;
-} *pVirtual_Memory_t;
+} VM_t, *pVM_t;
 
 typedef struct {
-    void *p_VAD_t;
-    unsigned int count;
-    unsigned int capacity;
-} VAD_Table_t;
+    lpVoid_t p_VAD_t;
+    pVM_t pVAD_;
+} VAD_Table_t, *pVAD_Table_t;
 
-pVirtual_Memory_t g_VAD_t = (pVirtual_Memory_t)0;
+pVAD_Table_t g_LTH_VAD_t = (pVAD_Table_t)0;
 
-pvoid VAD_Insert()
+lpVoid_t VAD_Insert()
 {
+    
+
     return 0;
 }
 
-pvoid Lithium_System::Memory::Virtual::Create(void *pMemory, size_t len, int iProt, int iFlags, int iFd, off_t offset)
+lpVoid_t Lithium_System::Memory::Virtual::Create(void *pMemory, size_t len, int iProt, int iFlags, int iFd, off_t offset)
 {
     
+
     return pMemory;
 }
 

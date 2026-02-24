@@ -35,25 +35,25 @@ extern "C" int  Lth_Entry(int argc, const char *argv[]);
 //     __builtin_unreachable();
 // }
 
-void Lth_Start(int argc, char **argv)
-{
-    int ret = Lth_Entry(argc, (const char **)argv);
-    __builtin_trap(); // libc exit
-}
+// void Lth_Start(int argc, char **argv)
+// {
+//     int ret = Lth_Entry(argc, (const char **)argv);
+//     __builtin_trap(); // libc exit
+// }
 
-#include <sys/syscall.h>
-#include <unistd.h>
-#include <X11/Xlib.h>
+// int Lth_Entry(int argc, const char *argv[])
+// {
 
-int Lth_Entry(int argc, const char *argv[])
-{
-    const char *msg = "Hello\n";
-    
-    XOpenDisplay(NULL);
+//     return 0;
+// }
 
-    return 0;
-}
+void Bootstrap();
 
 int Convergent(int argc, const char *argv[], ...);
 
-int main(int argc, const char *argv[]) { return Convergent(argc, argv); }
+int main(int argc, const char *argv[]) 
+{
+    Bootstrap();
+
+    return Convergent(argc, argv, 1);
+}
