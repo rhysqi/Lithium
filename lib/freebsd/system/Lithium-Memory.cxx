@@ -18,15 +18,22 @@ typedef struct {
 
 typedef struct {
     lpVoid_t p_VAD_t;
-    pVM_t pVAD_;
+    pVM_t pVM_t;
 } VAD_Table_t, *pVAD_Table_t;
 
 pVAD_Table_t g_LTH_VAD_t = (pVAD_Table_t)0;
 
-lpVoid_t VAD_Insert()
+lpVoid_t VAD_Register()
+{
+    VM_t s;
+
+    return 0;
+}
+
+lpVoid_t VAD_Unregister()
 {
     
-
+    
     return 0;
 }
 

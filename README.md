@@ -7,8 +7,8 @@ This approach gives developers granular control over text rendering, memory mana
 - [ ] Syntax Highlighting
 - [ ] Fonts Customization
 - [ ] Tiling Mode Window
-- [ ] Transparent Background
 - [ ] Image Background
+<!-- - [ ] Transparent Background -->
 
 # System Requirements
 - FreeBSD

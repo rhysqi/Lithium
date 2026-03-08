@@ -49,15 +49,24 @@ namespace Lithium_System {
 
 	// Memory definition
 	namespace Memory {
+
+		// FileMapped Definition
+		namespace FileMap {
+			pVoid_t Create();
+			pVoid_t Reserve();
+			pVoid_t Commit();
+			pVoid_t Reset();
+			pVoid_t Destroy();
+		}
 		
 		// Heap definition
 		namespace Heap {
-			void Create();
+			pVoid_t Create();
 		}
 
 		// Virtual definition
 		namespace Virtual {
-			void *Create(void *pMemory, size_t len, int iProt, int iFlags, int iFd, off_t offset);
+			pVoid_t Create(void *pMemory, size_t len, int iProt, int iFlags, int iFd, off_t offset);
 		}
 	}
 
@@ -108,7 +117,7 @@ namespace Lithium_System {
 		bool ASLR();
 		bool Debugger();
 
-		bool GPU_Enums();
+		void GPU_Enums();
     }
 }
 

@@ -4,14 +4,18 @@
 #include "../types/Lithium-Types.hh"
 
 namespace Lithium_Window {
-    using namespace Lithium_Types; 
+    using namespace Lithium_Types;
+
+    namespace Event {
+        
+    }
 
     namespace Util {
         unsigned int ScreenHeight();
 		unsigned int ScreenWidth();
 
-		unsigned int WindowHeight(pWindow_t window);
-		unsigned int WindowWidth(pWindow_t window);
+		unsigned int WindowHeight(pWindow_t Window);
+		unsigned int WindowWidth(pWindow_t Window);
     }
 }
 

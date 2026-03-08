@@ -1,74 +1,89 @@
-#include "../../.././include/system/Lithium-System-FreeBSD.hh"
-#include "CL/cl_platform.h"
+// #include <CL/cl.h>
+// #include <unistd.h>
 
-#include <unistd.h>
+// void GPU_Enums()
+// {
+//     cl_uint platform_count = 0;
 
-#include <sys/sysctl.h>
-#include <sys/user.h>
-#include <sys/ptrace.h>
+//     if (clGetPlatformIDs(0, 0, &platform_count) != CL_SUCCESS)
+//         return;
+
+//     if (platform_count == 0)
+//         return;
+
+//     cl_platform_id platforms[8];
+//     if (platform_count > 8)
+//         platform_count = 8;
+
+//     if (clGetPlatformIDs(platform_count, platforms, 0) != CL_SUCCESS)
+//         return;
+
+//     for (cl_uint i = 0; i < platform_count; ++i)
+//     {
+//         cl_uint device_count = 0;
+
+//         if (clGetDeviceIDs(platforms[i],
+//                            CL_DEVICE_TYPE_ALL,
+//                            0,
+//                            0,
+//                            &device_count) != CL_SUCCESS)
+//             continue;
+
+//         if (device_count == 0)
+//             continue;
+
+//         cl_device_id devices[16];
+//         if (device_count > 16)
+//             device_count = 16;
+
+//         if (clGetDeviceIDs(platforms[i],
+//                            CL_DEVICE_TYPE_ALL,
+//                            device_count,
+//                            devices,
+//                            0) != CL_SUCCESS)
+//             continue;
+
+//         for (cl_uint d = 0; d < device_count; ++d)
+//         {
+//             char name[128];
+//             char vendor[128];
+//             cl_device_type type;
+//             cl_uint compute_units;
+//             cl_ulong global_mem;
+
+//             clGetDeviceInfo(devices[d], CL_DEVICE_NAME,
+//                             sizeof(name), name, 0);
+
+//             clGetDeviceInfo(devices[d], CL_DEVICE_VENDOR,
+//                             sizeof(vendor), vendor, 0);
+
+//             clGetDeviceInfo(devices[d], CL_DEVICE_TYPE,
+//                             sizeof(type), &type, 0);
+
+//             clGetDeviceInfo(devices[d], CL_DEVICE_MAX_COMPUTE_UNITS,
+//                             sizeof(compute_units), &compute_units, 0);
+
+//             clGetDeviceInfo(devices[d], CL_DEVICE_GLOBAL_MEM_SIZE,
+//                             sizeof(global_mem), &global_mem, 0);
+
+//             /* Replace this with your own logging system */
+//             write(1, "GPU Found:\n", 11);
+//             write(1, name, sizeof(name));
+//             write(1, "\n", 1);
+//         }
+//     }
+// }
+
+// int main(int argc, const char *argv[]){
+    
+//     GPU_Enums();
+
+//     return 0;
+// }
+
 
 #include <CL/cl.h>
-
-#ifdef __FreeBSD__
-
-bool Lithium_System::Util::ASLR()
-{
-    int value = 0;
-    size_t len = sizeof(value);
-
-    #if defined(__LP64__)
-        const char* name = "kern.elf64.aslr.enable";
-    #else
-        const char* name = "kern.elf32.aslr.enable";
-    #endif
-
-    if (
-        sysctlbyname(name, &value, &len, Lithium_Types::Null_Ptr_t, 0) == -1
-    ) {
-        return false; /* fail-safe: assume not secure */
-    }
-
-    return (value != 0);
-}
-
-bool Lithium_System::Util::Debugger()
-{
-    int mib[4];
-    struct kinfo_proc kp;
-    size_t len = sizeof(kp);
-
-    mib[0] = CTL_KERN;
-    mib[1] = KERN_PROC;
-    mib[2] = KERN_PROC_PID;
-    mib[3] = getpid();
-
-    if (sysctl(mib, 4, &kp, &len, NULL, 0) == -1)
-        return false;
-
-    return (kp.ki_flag & P_TRACED) != 0;
-}
-
-bool Lithium_System::Util::SSE42_Support()
-{
-    #if defined (__x86_64__) || defined (__i386__)
-    return __builtin_cpu_supports("sse4.2");
-
-    #else
-        return false;
-    
-    #endif /* defined (__x86_64__) || defined (__i386__) */
-}
-
-bool Lithium_System::Util::AVX2_Support()
-{
-    #if defined (__x86_64__) || defined (__i386__)
-    return __builtin_cpu_supports("avx2");
-
-    #else
-        return false;
-    
-    #endif /* defined (__x86_64__) || defined (__i386__) */
-}
+#include <unistd.h>
 
 static void write_str(const char* s)
 {
@@ -100,7 +115,7 @@ static void write_u64(cl_ulong value)
     write(1, &buf[i + 1], 30 - i);
 }
 
-cl_uint GPU_Init() 
+cl_uint GPU_Enums(void)
 {
     cl_uint total_devices = 0;
 
@@ -210,13 +225,12 @@ cl_uint GPU_Init()
     return total_devices;
 }
 
-void Lithium_System::Util::GPU_Enums()
+int main(void)
 {
-    cl_uint devices = GPU_Init();
+    cl_uint devices = GPU_Enums();
 
     if (devices == 0)
         write_str("No OpenCL devices found.\n");
-}
 
-#endif /* __FreeBSD__ */
-#pragma endregion FreeBSD System API Segments
+    return 0;
+}

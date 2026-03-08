@@ -27,6 +27,16 @@ namespace Lithium_Types {
     typedef void *lpWindow_t;
 
     constexpr pVoid_t Null_Ptr_t = (lpVoid_t)0;
+
+    enum Error {
+        Success                     = 0,
+
+        Bootstrap_ASLR_Required     = 21,
+        Bootstrap_Debugger_Detected = 22,
+        Bootstrap_CPU_Unsupported   = 23,
+
+        Bootstrap_Unknown           = 30
+    };
 }
 
 #endif /* __FreeBSD__ */
